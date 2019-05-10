@@ -1,0 +1,1 @@
+include ':app', ':river-base', ':river-android', ':river-android-common', ':river-android-external', ':river-web', ':river-web-common', ':river-android-data'
