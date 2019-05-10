@@ -1,3 +1,9 @@
+package com.yazan98.river.base.rx
+
+import com.yazan98.river.base.RiverConsts
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,36 +208,37 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 12:31 AM
+ */
 
-android {
-    compileSdkVersion 28
+class RxManager {
 
+    private var compositDisposable: CompositeDisposable = CompositeDisposable()
 
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+    fun addRequest(request: Disposable) {
+        compositDisposable.add(request)
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    fun disposeRequests() {
+        if (compositDisposable.size() > 0) {
+            compositDisposable.dispose()
+        } else {
+            println(
+                RiverConsts.RX_MANAGER_EMPTY
+            )
         }
     }
 
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    fun clearRequests() {
+        if (compositDisposable.size() > 0) {
+            compositDisposable.clear()
+        } else {
+            println(
+                RiverConsts.RX_MANAGER_EMPTY
+            )
+        }
+    }
 }

@@ -1,3 +1,9 @@
+package com.yazan98.river.base.presenter.base
+
+import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.scopes.InitializerScope
+import com.yazan98.river.base.view.BaseView
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,36 +208,21 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 1:10 AM
+ */
 
-android {
-    compileSdkVersion 28
+interface RiverPresenterImpl<V : BaseView>: Presenter {
 
+    fun getView(): V
 
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+    fun getViewStatus(): Boolean
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    @InitializerScope
+    fun attachView(v: V)
 
-    }
+    fun changeViewStatus(newStatus: Boolean)
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

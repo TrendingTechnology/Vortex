@@ -1,3 +1,11 @@
+package com.yazan98.river.base.presenter
+
+import com.yazan98.river.base.RiverConsts
+import com.yazan98.river.base.error.ViewNotAttatchedError
+import com.yazan98.river.base.presenter.base.RiverPresenterImpl
+import com.yazan98.river.base.view.BaseView
+import java.util.concurrent.atomic.AtomicBoolean
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,36 +210,38 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 1:03 AM
+ */
 
-android {
-    compileSdkVersion 28
+abstract class RiverPresenter<View : BaseView> : RiverPresenterImpl<View> {
 
+    private lateinit var view: View
+    private val viewStatus: AtomicBoolean = AtomicBoolean(false)
 
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    override fun getView(): View {
+        if (::view.isInitialized) {
+            return view
+        } else {
+            throw ViewNotAttatchedError(
+                RiverConsts.VIEW_NULL
+            )
         }
     }
 
-}
+    override fun getViewStatus(): Boolean {
+        return this.viewStatus.get()
+    }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    override fun attachView(v: View) {
+        changeViewStatus(true)
+        this.view = v
+    }
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    override fun changeViewStatus(newStatus: Boolean) {
+        this.viewStatus.set(newStatus)
+    }
+
 }

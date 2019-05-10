@@ -1,3 +1,16 @@
+package com.yazan98.river.base.presenter
+
+import com.yazan98.river.base.RiverConsts
+import com.yazan98.river.base.error.ViewNotAttatchedError
+import com.yazan98.river.base.presenter.base.Presenter
+import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
+import com.yazan98.river.base.rx.RxManager
+import com.yazan98.river.base.view.BaseView
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
+import java.util.concurrent.atomic.AtomicBoolean
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,36 +215,65 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 1:08 AM
+ */
 
-android {
-    compileSdkVersion 28
+class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
 
+    private lateinit var view: View
+    private val viewStatus: AtomicBoolean = AtomicBoolean(false)
+    private val reactiveManager: RxManager = RxManager()
+    private var presenterStatus: Observable<PresenterStatus> = Observable.create { emitter ->
 
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        if (::view.isInitialized) {
+            getView().acceptPresenterStatus(PresenterStatus.INITIALIZATION)
+        }
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        emitter.setCancellable {
+            if (::view.isInitialized) {
+                getView().onError(Throwable(
+                    RiverConsts.PRESENTER_OBSERVABLE_CANCELATION
+                ))
+            }
         }
     }
 
-}
+    override fun getView(): View {
+        if (::view.isInitialized) {
+            return view
+        } else {
+            throw ViewNotAttatchedError(
+                RiverConsts.VIEW_NULL
+            )
+        }
+    }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    override fun getViewStatus(): Boolean {
+        return this.viewStatus.get()
+    }
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    override fun addRxRequest(request: Disposable) {
+        reactiveManager.addRequest(request)
+    }
+
+    override fun destroyRxPresenter() {
+        reactiveManager.clearRequests()
+    }
+
+    override fun attachView(v: View) {
+        changeViewStatus(true)
+        this.view = v
+    }
+
+    override fun changeViewStatus(newStatus: Boolean) {
+        this.viewStatus.set(newStatus)
+    }
+
+    override fun changePresenterStatus(newStatus: PresenterStatus) {
+        //TODO: handle THis
+    }
+
 }

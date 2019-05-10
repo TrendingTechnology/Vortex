@@ -1,3 +1,7 @@
+import io.reactivex.*
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,36 +206,54 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+class RxProvider<Request> {
 
-android {
-    compileSdkVersion 28
-
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+    fun getObservableRequest(request: Observable<Request>): Observable<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    fun getFlowableRequest(request: Flowable<Request>): Flowable<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
     }
 
-}
+    fun getSingleRequest(request: Single<Request>): Single<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    fun getMaybeRequest(request: Maybe<Request>): Maybe<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    fun getObservableListRequest(request: Observable<List<Request>>): Observable<List<Request>> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
+
+    fun getFlowableListRequest(request: Flowable<List<Request>>): Flowable<List<Request>> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
+
+    fun getSingleListRequest(request: Single<List<Request>>): Single<List<Request>> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
+
+    fun getMaybeListRequest(request: Maybe<List<Request>>): Maybe<List<Request>> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.newThread())
+    }
+
 }
