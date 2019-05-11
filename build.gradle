@@ -203,7 +203,7 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.3.21'
+    ext.kotlin_version = '1.3.31'
 
     repositories {
         google()
@@ -252,10 +252,19 @@ allprojects {
 }
 
 allprojects {
-    apply plugin: Plugins.MavenPublishPlugin
-    apply plugin: Plugins.AndroidMavenPlugin
-    apply plugin: Plugins.Bintray
-//    apply plugin: Plugins.Maven
+    apply plugin : "maven-publish"
+}
+
+apply plugin: Plugins.JavaPlugin
+apply plugin: Plugins.IdeaPlugin
+apply plugin: Plugins.AndroidMavenPlugin
+apply plugin: Plugins.SpringBootPluginmanagment
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 /**
@@ -264,3 +273,27 @@ allprojects {
 apply from: "tools/checkstyle.gradle"
 apply from: "tools/pmd.gradle"
 apply from: "tools/SpringDependencies.gradle"
+
+/**
+ * Library Info
+ */
+
+ext {
+    RiverGroup = "com.yazan98.river.core"
+    RiverVersion = "0.0.1"
+    PackagingType = "arr"
+    LibraryName = "River-Core"
+    GithubUrl = "https://www.github.com/Yazan98/River-Core"
+    GitUrl = "https://www.github.com/Yazan98/River-Core.git"
+    licenseName = "Apache-2.0"
+    licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0"
+    distribution = 'repo'
+    GithubIssuesUrl = "https://www.github.com/Yazan98/River-Core/issues"
+    DeveloperID = "yt98"
+    DeveloperName = "Yazan Tarifi"
+    DeveloperEmail = ""
+    Description = "River Android Applications"
+
+    bintrayUsername = "yt98"
+    bintrayApiKey = ""
+}

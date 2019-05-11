@@ -30,7 +30,6 @@ import android.os.Looper
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import com.yazan98.river.android.common.utils.LocationUtils
-import com.yt98.zedra.ui.listeners.LocationServiceInfo
 import timber.log.Timber
 
 /**

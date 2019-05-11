@@ -207,6 +207,7 @@ include ':app',
         ':river-android',
         ':river-android-extras',
         ':river-android-external',
-        ':river-web',
-        ':river-web-extras',
         ':river-android-data'
+
+//include ':river-web',
+//        ':river-web-extras'

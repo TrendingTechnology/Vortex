@@ -203,7 +203,10 @@
  */
 
 apply plugin: Plugins.JavaLibraryPlugin
+apply plugin: 'kotlin'
 apply plugin: Plugins.KotlinPlugin
+apply plugin: Plugins.Maven
+apply plugin: Plugins.Bintray
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -218,12 +221,137 @@ targetCompatibility = "${RiverBase.JavaV}"
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "${RiverBase.JavaV}"
+        jvmTarget = "1.8"
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "${RiverBase.JavaV}"
+        jvmTarget = "1.8"
     }
 }
+
+
+group = rootProject.ext.RiverGroup
+version = rootProject.ext.RiverVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging rootProject.ext.PackagingType
+            name rootProject.ext.LibraryName
+            description rootProject.ext.Description
+            url rootProject.ext.GithubUrl
+
+            artifactId "river-base-ktx"
+            groupId rootProject.ext.RiverGroup
+            version rootProject.ext.RiverVersion
+
+            licenses {
+
+                license {
+                    name rootProject.ext.licenseName
+                    url rootProject.ext.licenseUrl
+                    distribution rootProject.ext.distribution
+                }
+            }
+
+            scm {
+                connection rootProject.ext.GitUrl
+                url rootProject.ext.GithubUrl
+            }
+
+            developers {
+
+                developer {
+                    id rootProject.ext.DeveloperID
+                    name rootProject.ext.DeveloperName
+                    email rootProject.ext.DeveloperEmail
+                }
+
+            }
+
+        }
+    }
+}
+
+
+bintray {
+
+    user = "${rootProject.ext.bintrayUsername}"
+    key = "${rootProject.ext.bintrayApiKey}"
+
+    configurations = ['archives']
+    publications = ['Production']
+
+    publish = true
+
+    pkg {
+        repo = rootProject.ext.LibraryName
+        name = "river-base-ktx"
+        desc = rootProject.ext.Description
+
+        dryRun = false
+        publish = true
+        override = true
+
+        userOrg = user
+        licenses = ["${rootProject.ext.licenseName}"]
+        vcsUrl = rootProject.ext.GitUrl
+        issueTrackerUrl = rootProject.ext.GithubIssuesUrl
+
+        publicDownloadNumbers = true
+
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc.failOnError = false
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/libs/river-base-${rootProject.ext.RiverVersion}.jar")
+            groupId rootProject.ext.RiverGroup
+            artifactId "river-base-ktx"
+            version rootProject.ext.RiverVersion
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}
+buildscript {
+    ext.kotlin_version = '1.3.31'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+repositories {
+    mavenCentral()
+}
+

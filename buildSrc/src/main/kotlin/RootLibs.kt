@@ -17,7 +17,7 @@
 object RootLibs {
 
     const val AndroidGradle = "com.android.tools.build:gradle:3.4.0"
-    const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
+    const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.31"
     const val AndroidMaven = "com.github.dcendents:android-maven-gradle-plugin:1.4.1"
     const val Bintray: String = "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4"
     const val SpringBootPluginV2 : String = "org.springframework.boot:spring-boot-gradle-plugin:2.2.0.BUILD-SNAPSHOT"

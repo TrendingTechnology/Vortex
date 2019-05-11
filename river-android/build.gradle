@@ -205,6 +205,8 @@
 apply plugin: Plugins.AndroidLibraryPlugin
 apply plugin: Plugins.AndroidKotlinPlugin
 apply plugin: Plugins.AndroidKotlinExtentions
+apply plugin: Plugins.AndroidMavenPlugin
+apply plugin: Plugins.Bintray
 
 android {
     compileSdkVersion RiverAndroidDeps.CompileSdkV
@@ -244,4 +246,108 @@ dependencies {
     implementation RiverAndroidDeps.NavigationFragment
     implementation RiverAndroidDeps.NavigationUI
 
+    implementation RiverBase.RxJava
+
+}
+
+ext {
+    packageName = "river-android-ktx"
+    artifactId =
+    artifact =
+    Description = "Android Structure For River Applications"
+}
+
+
+group = rootProject.ext.RiverGroup
+version = rootProject.ext.RiverVersion
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging rootProject.ext.PackagingType
+            name rootProject.ext.LibraryName
+            description rootProject.ext.Description
+            url rootProject.ext.GithubUrl
+
+            artifactId "river-android-ktx"
+            groupId rootProject.ext.RiverGroup
+            version rootProject.ext.RiverVersion
+
+            licenses {
+
+                license {
+                    name rootProject.ext.licenseName
+                    url rootProject.ext.licenseUrl
+                    distribution rootProject.ext.distribution
+                }
+            }
+
+            scm {
+                connection rootProject.ext.GitUrl
+                url rootProject.ext.GithubUrl
+            }
+
+            developers {
+
+                developer {
+                    id rootProject.ext.DeveloperID
+                    name rootProject.ext.DeveloperName
+                    email rootProject.ext.DeveloperEmail
+                }
+
+            }
+
+        }
+    }
+}
+
+bintray {
+
+    user = "${rootProject.ext.bintrayUsername}"
+    key = "${rootProject.ext.bintrayApiKey}"
+
+    configurations = ['archives']
+    publications = ['Production']
+
+    publish = true
+
+    pkg {
+        repo = rootProject.ext.LibraryName
+        name = "river-android-ktx"
+        desc = rootProject.ext.Description
+
+        dryRun = false
+        publish = true
+        override = true
+
+        userOrg = user
+        licenses = ["${rootProject.ext.licenseName}"]
+        vcsUrl = rootProject.ext.GitUrl
+        issueTrackerUrl = rootProject.ext.GithubIssuesUrl
+
+        publicDownloadNumbers = true
+
+    }
+}
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/river-android-release.aar")
+            groupId rootProject.ext.RiverGroup
+            artifactId "river-android-ktx"
+            version rootProject.ext.RiverVersion
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
 }
