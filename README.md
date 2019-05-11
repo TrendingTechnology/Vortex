@@ -31,7 +31,7 @@ Build.gradle
     dependencies {
         implementation "com.yazan98.river.core:river-base-ktx:0.0.1"
         implementation "com.yazan98.river.core:river-android-ktx:0.0.1"
-        implementation "com.yazan98.river.core:river-android-ktx:0.0.1"
+        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.1"
         implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.1"
     }
 ```
