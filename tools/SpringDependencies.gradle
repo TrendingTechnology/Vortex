@@ -1,0 +1,176 @@
+ext {
+
+    //Plugins
+    JavaExternalPlugin = "java"
+    SpringManagmentPlugin = "io.spring.dependency-management"
+    ApplicationWarImagePlugin = "war"
+    IdeaExternalPlugin = "idea"
+    ApplicationExternalPlugin = "application"
+    NebulaProjectPlugin = "nebula.project-plugin"
+    NebulaLock = "nebula.dependency-lock"
+    GradleProtobufPlugin = "gradleProtobufPlugin"
+    TomcatPlugin = "com.bmuschko.tomcat"
+    TomcatBasePlugin = "com.bmuschko.tomcat-base"
+    set('springCloudVersion', 'Greenwich.BUILD-SNAPSHOT')
+
+    SpringConfigurations = [
+            SpringCache : "org.springframework.boot:spring-boot-starter-cache",
+            HateoasStarter : "org.springframework.boot:spring-boot-starter-hateoas",
+            SpringThymeleafWeb : "org.springframework.boot:spring-boot-starter-thymeleaf",
+            SpringStarterWeb : "org.springframework.boot:spring-boot-starter-web",
+            SpringWebServices : "org.springframework.boot:spring-boot-starter-web-services",
+            WebFlux : "org.springframework.boot:spring-boot-starter-webflux",
+            KafkaStreams : "org.apache.kafka:kafka-streams",
+            ServerConfig : "org.springframework.cloud:spring-cloud-config-server",
+            SpringCloudConfig : "org.springframework.cloud:spring-cloud-starter",
+            SpringCloudStarter : "org.springframework.cloud:spring-cloud-starter-config",
+            SpringServiceBrocker : "org.springframework.cloud:spring-cloud-starter-open-service-broker-webmvc:2.1.1.RELEASE",
+            ZookeeperConfig : "org.springframework.cloud:spring-cloud-starter-zookeeper-config",
+            KafkaConfigure : "org.springframework.kafka:spring-kafka",
+            Lombok : "org.projectlombok:lombok",
+            SpringDevTools : "org.springframework.boot:spring-boot-devtools",
+            ConfigurationProcessor : "org.springframework.boot:spring-boot-configuration-processor",
+            ProjectLombokProcessor : "org.projectlombok:lombok",
+            SpringAcuator : "org.springframework.boot:spring-boot-starter-actuator",
+            SpringAcuator2 : "org.springframework.boot:spring-boot-starter-actuator:2.1.4.RELEASE",
+            ApacheLang3 : "org.apache.commons:commons-lang3:3.9",
+            JavaXApi : "javax.servlet:javax.servlet-api:3.0.1",
+            JavaXServlet : "javax.servlet:jstl:1.2",
+            SpringBootMail : "org.springframework.boot:spring-boot-starter-mail:2.1.2.RELEASE",
+            SpringContextSupport : "org.springframework:spring-context-support:5.1.3.RELEASE",
+            protobufJava : "com.google.protobuf:protobuf-java:2.4.1",
+            ElasticSearch : "org.springframework.boot:spring-boot-starter-data-elasticsearch",
+            FirebaseAdmin : "com.google.firebase:firebase-admin:6.8.1"
+    ]
+
+    SpringConfigurationsStarter = [
+            [configuration: "implementation", dependency: SpringConfigurations.SpringCache],
+            [configuration: "implementation", dependency: SpringConfigurations.ElasticSearch],
+            [configuration: "implementation", dependency: SpringConfigurations.protobufJava],
+            [configuration: "implementation", dependency: SpringConfigurations.JavaXApi],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringBootMail],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringContextSupport],
+            [configuration: "implementation", dependency: SpringConfigurations.JavaXServlet],
+            [configuration: "implementation", dependency: SpringConfigurations.ApacheLang3],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringAcuator],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringAcuator2],
+            [configuration: "implementation", dependency: SpringConfigurations.HateoasStarter],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringThymeleafWeb],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringStarterWeb],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringWebServices],
+            [configuration: "implementation", dependency: SpringConfigurations.WebFlux],
+            [configuration: "implementation", dependency: SpringConfigurations.ServerConfig],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringCloudConfig],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringCloudStarter],
+            [configuration: "implementation", dependency: SpringConfigurations.SpringServiceBrocker],
+            [configuration: "implementation", dependency: SpringConfigurations.FirebaseAdmin],
+            [configuration: "implementation", dependency: SpringConfigurations.KafkaConfigure],
+            [configuration: "compileOnly", dependency: SpringConfigurations.Lombok],
+            [configuration: "runtimeOnly", dependency: SpringConfigurations.SpringDevTools],
+            [configuration: "annotationProcessor", dependency: SpringConfigurations.ConfigurationProcessor],
+            [configuration: "annotationProcessor", dependency: SpringConfigurations.ProjectLombokProcessor]
+    ]
+
+    SpringDataConfiguration = [
+            SpringDataJpa : "org.springframework.boot:spring-boot-starter-data-jpa",
+            MongoDatabase : "org.springframework.boot:spring-boot-starter-data-mongodb",
+            MongoReactiveDatabase : "org.springframework.boot:spring-boot-starter-data-mongodb-reactive",
+            SpringDataStarterRest : "org.springframework.boot:spring-boot-starter-data-rest",
+            JDBCStarter : "org.springframework.boot:spring-boot-starter-jdbc",
+            HalBrowzerData : "org.springframework.data:spring-data-rest-hal-browser",
+            JdbcSession : "org.springframework.session:spring-session-jdbc",
+            H2Database : "com.h2database:h2",
+            MySqlConnector : "mysql:mysql-connector-java",
+            Postgresql : "org.postgresql:postgresql",
+            JavaXInterceptor : "javax.interceptor:javax.interceptor-api:1.2"
+    ]
+
+    SpringDataConfigurationStarter = [
+            [configuration: "implementation", dependency: SpringDataConfiguration.SpringDataJpa],
+            [configuration: "implementation", dependency: SpringDataConfiguration.JavaXInterceptor],
+            [configuration: "implementation", dependency: SpringDataConfiguration.MongoDatabase],
+            [configuration: "implementation", dependency: SpringDataConfiguration.MongoReactiveDatabase],
+            [configuration: "implementation", dependency: SpringDataConfiguration.SpringDataStarterRest],
+            [configuration: "implementation", dependency: SpringDataConfiguration.JDBCStarter],
+            [configuration: "implementation", dependency: SpringDataConfiguration.HalBrowzerData],
+//            [configuration: "implementation", dependency: SpringDataConfiguration.JdbcSession],
+            [configuration: "runtimeOnly", dependency: SpringDataConfiguration.H2Database],
+            [configuration: "runtimeOnly", dependency: SpringDataConfiguration.MySqlConnector],
+            [configuration: "runtimeOnly", dependency: SpringDataConfiguration.Postgresql],
+    ]
+
+    SpringSecurityConfiguration = [
+            OAuthClient : "org.springframework.boot:spring-boot-starter-oauth2-client",
+            SpringStarterSecurity : "org.springframework.boot:spring-boot-starter-security",
+            SpringOAuth2 : "org.springframework.cloud:spring-cloud-starter-oauth2",
+            SpringConfigureSecurity : "org.springframework.cloud:spring-cloud-starter-security",
+            SecurityCrypto : "org.springframework.security:spring-security-crypto",
+            SecurityCore : "org.springframework.security:spring-security-core:5.1.2.RELEASE",
+            SecurityConfig : "org.springframework.security:spring-security-config:5.1.2.RELEASE",
+            JsonWebTokens : "io.jsonwebtoken:jjwt:0.6.0",
+            SpringOAuthSnapshot : "org.springframework.security.oauth:spring-security-oauth2:2.3.4.BUILD-SNAPSHOT"
+    ]
+
+    SpringSecurityConfigurationStarter = [
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SpringStarterSecurity],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SecurityCrypto],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SpringOAuthSnapshot],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.OAuthClient],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SpringOAuth2],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SpringConfigureSecurity],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SecurityCore],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.SecurityConfig],
+            [configuration: "implementation", dependency: SpringSecurityConfiguration.JsonWebTokens],
+    ]
+
+    HystrixConfigueration = [
+            Hystrix : "org.springframework.cloud:spring-cloud-starter-netflix-hystrix",
+            HystrixDashboard : "org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard"
+    ]
+
+    HystrixConfiguerationStarter = [
+            [configuration: "implementation", dependency: HystrixConfigueration.Hystrix],
+            [configuration: "implementation", dependency: HystrixConfigueration.HystrixDashboard]
+    ]
+
+    Testing = [
+            SpringStarterTesting : "org.springframework.boot:spring-boot-starter-test",
+            MongoDatabaseTesting : "de.flapdoodle.embed:de.flapdoodle.embed.mongo",
+            ReactorTesting : "io.projectreactor:reactor-test",
+            KafkaTesting : "org.springframework.kafka:spring-kafka-test",
+            SecurityTesting : "org.springframework.security:spring-security-test",
+            CucumberJava : "info.cukes:cucumber-java:1.2.5",
+            CucumberJunit : "info.cukes:cucumber-junit:1.2.5",
+            CucumberSpring : "info.cukes:cucumber-spring:1.2.5"
+    ]
+
+    TestingConfigurationInitializer = [
+            [configuration: "testImplementation", dependency: Testing.SpringStarterTesting],
+            [configuration: "testImplementation", dependency: Testing.MongoDatabaseTesting],
+            [configuration: "testImplementation", dependency: Testing.ReactorTesting],
+            [configuration: "testImplementation", dependency: Testing.KafkaTesting],
+            [configuration: "testImplementation", dependency: Testing.SecurityTesting],
+            [configuration: "testImplementation", dependency: Testing.CucumberJava],
+            [configuration: "testImplementation", dependency: Testing.CucumberJunit],
+            [configuration: "testImplementation", dependency: Testing.CucumberSpring]
+    ]
+
+    SwaggerConfig = [
+            SwaggerAnnoutations : "io.swagger:swagger-annotations:2.0.0-rc2",
+            SwaggerJaxrs :"io.swagger:swagger-jaxrs:1.5.22",
+            SwaggerCore : "io.swagger:swagger-core:2.0.0-rc2",
+            SwaggerModels : "io.swagger:swagger-models:2.0.0-rc2",
+            SwaggerUI : "io.springfox:springfox-swagger-ui:2.9.2",
+            SwaggerUI2 : "io.springfox:springfox-swagger2:2.9.2"
+    ]
+
+    SwaggerConfigStarter = [
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerAnnoutations],
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerJaxrs],
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerCore],
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerModels],
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerUI],
+            [configuration: "implementation", dependency: SwaggerConfig.SwaggerUI2]
+    ]
+
+}

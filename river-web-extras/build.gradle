@@ -202,11 +202,74 @@
  *    limitations under the License.
  */
 
-apply plugin: 'java-library'
+apply plugin: "${Plugins.KotlinPlugin}"
+apply plugin: "${Plugins.JavaLibraryPlugin}"
+apply plugin: "${Plugins.SpringBootPlugin}"
+apply plugin: "${Plugins.JavaLibraryPlugin}"
+apply plugin: "${Plugins.SpringBootPluginmanagment}"
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    implementation project(":river-base")
+
+    rootProject.SpringConfigurationsStarter.each {
+        add(it.configuration, it.dependency)
+    }
+
+    rootProject.SpringDataConfigurationStarter.each {
+        add(it.configuration, it.dependency)
+    }
+
+    rootProject.SpringSecurityConfigurationStarter.each {
+        add(it.configuration, it.dependency)
+    }
+
+    rootProject.HystrixConfiguerationStarter.each {
+        add(it.configuration, it.dependency)
+    }
+
+    rootProject.TestingConfigurationInitializer.each {
+        add(it.configuration, it.dependency)
+    }
+
+    rootProject.SwaggerConfigStarter.each {
+        add(it.configuration, it.dependency)
+    }
+
+}
+
+configurations {
+    provided.all*.exclude group: 'javax.servlet'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': ''
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': ''
+    }
+}

@@ -202,19 +202,21 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+apply plugin: Plugins.AndroidLibraryPlugin
+apply plugin: Plugins.AndroidKotlinPlugin
+apply plugin: Plugins.AndroidKotlinExtentions
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion RiverAndroidDeps.CompileSdkV
 
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion RiverAndroidDeps.MinSdkV
+        targetSdkVersion RiverAndroidDeps.CompileSdkV
+        versionCode RiverAndroidDeps.VersionCode
+        versionName RiverAndroidDeps.VersionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner RiverAndroidDeps.TestRunner
 
     }
 

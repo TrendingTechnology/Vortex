@@ -204,6 +204,8 @@
 
 
 apply plugin: Plugins.AndroidLibraryPlugin
+apply plugin: Plugins.AndroidKotlinPlugin
+apply plugin: Plugins.AndroidKotlinExtentions
 
 android {
     compileSdkVersion RiverAndroidDeps.CompileSdkV

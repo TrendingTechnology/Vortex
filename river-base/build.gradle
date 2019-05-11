@@ -203,7 +203,7 @@
  */
 
 apply plugin: Plugins.JavaLibraryPlugin
-apply plugin: 'kotlin'
+apply plugin: Plugins.KotlinPlugin
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
