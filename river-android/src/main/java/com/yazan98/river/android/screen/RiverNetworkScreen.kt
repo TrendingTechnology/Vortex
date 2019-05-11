@@ -1,3 +1,5 @@
+import android.annotation.SuppressLint
+import android.os.Bundle
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.base.view.NetworkView
 
@@ -18,6 +20,18 @@ import com.yazan98.river.base.view.NetworkView
  */
 
 abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View> , Router>: BaseScreen() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        handlePresenterStatus()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun handlePresenterStatus() {
+        getPresenter().getPresenterStatus().subscribe {
+            getPresenter().getView().acceptPresenterStatus(it)
+        }
+    }
 
     protected abstract fun getPresenter(): Presenter
     protected abstract fun getRouter(): Router

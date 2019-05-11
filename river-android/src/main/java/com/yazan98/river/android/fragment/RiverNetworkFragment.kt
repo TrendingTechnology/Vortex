@@ -1,3 +1,8 @@
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.base.view.NetworkView
 
@@ -17,7 +22,23 @@ import com.yazan98.river.base.view.NetworkView
  *    limitations under the License.
  */
 
-abstract class RiverNetworkFragment<View: NetworkView , Presenter: RiverRxPresenter<View> , Router> : BaseFragment() {
+abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>, Router> : BaseFragment() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): android.view.View? {
+        handlePresenterStatus()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    @SuppressLint("CheckResult")
+    private fun handlePresenterStatus() {
+        getPresenter().getPresenterStatus().subscribe {
+            getPresenter().getView().acceptPresenterStatus(it)
+        }
+    }
 
     protected abstract fun getPresenter(): Presenter
     protected abstract fun getRouter(): Router

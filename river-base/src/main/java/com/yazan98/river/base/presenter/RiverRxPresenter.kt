@@ -9,6 +9,7 @@ import com.yazan98.river.base.view.BaseView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -226,20 +227,7 @@ class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
     private lateinit var view: View
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
     private val reactiveManager: RxManager = RxManager()
-    private var presenterStatus: Observable<PresenterStatus> = Observable.create { emitter ->
-
-        if (::view.isInitialized) {
-            getView().acceptPresenterStatus(PresenterStatus.INITIALIZATION)
-        }
-
-        emitter.setCancellable {
-            if (::view.isInitialized) {
-                getView().onError(Throwable(
-                    RiverConsts.PRESENTER_OBSERVABLE_CANCELATION
-                ))
-            }
-        }
-    }
+    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
 
     override fun getView(): View {
         if (::view.isInitialized) {
@@ -273,7 +261,13 @@ class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
     }
 
     override fun changePresenterStatus(newStatus: PresenterStatus) {
-        //TODO: handle THis
+        synchronized(newStatus) {
+            this.presenterStatusSubject.onNext(newStatus)
+        }
+    }
+
+    override fun getPresenterStatus(): Observable<PresenterStatus> {
+        return this.presenterStatusSubject
     }
 
 }
