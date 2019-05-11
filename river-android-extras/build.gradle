@@ -202,19 +202,20 @@
  *    limitations under the License.
  */
 
-apply plugin: 'com.android.library'
+
+apply plugin: Plugins.AndroidLibraryPlugin
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion RiverAndroidDeps.CompileSdkV
 
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion RiverAndroidDeps.MinSdkV
+        targetSdkVersion RiverAndroidDeps.CompileSdkV
+        versionCode RiverAndroidDeps.VersionCode
+        versionName RiverAndroidDeps.VersionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner RiverAndroidDeps.TestRunner
 
     }
 
@@ -229,9 +230,34 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation RiverAndroidDeps.AppCompat
+    testImplementation RiverAndroidDeps.Junit
+    androidTestImplementation RiverAndroidDeps.Runner
+    androidTestImplementation RiverAndroidDeps.Esspresso
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation RiverAndroidExtras.FirebaseAuth
+    implementation RiverAndroidExtras.FirebaseFirestore
+    implementation RiverAndroidExtras.FirebaseMessaging
+    implementation RiverAndroidExtras.FirebaseStorage
+    implementation RiverAndroidExtras.FirebaseCrashlytics
+    implementation RiverAndroidExtras.FirebaseAuthUI
+    implementation RiverAndroidExtras.FirebaseCore
+    implementation RiverAndroidExtras.FirebaseDatabase
+
+    debugImplementation RiverAndroidExtras.LeakCanaryAndroid
+    implementation RiverAndroidExtras.Leaksentry
+
+    implementation RiverAndroidExtras.RxPrefs
+    implementation RiverAndroidExtras.GooglePlayLocationServices
+
+    implementation RiverAndroidExtras.Picasso
+    implementation RiverAndroidExtras.Glide
+    implementation RiverAndroidExtras.Fresco
+
+    implementation RiverAndroidExtras.MultiDexApps
+    implementation RiverAndroidExtras.Timber
+    implementation RiverAndroidExtras.Stetho
+    implementation RiverAndroidExtras.RecyclerView
+    implementation RiverAndroidExtras.AndroidMaterialDesign
+
 }
