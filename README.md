@@ -63,6 +63,6 @@ VIPER Architecture Components
 
 # Usage 
 To Build Full Android Application From "River Generator"
-> River Generator -> https://www.github.com/Yazan98.RiverGenerator
+> River Generator -> https://www.github.com/Yazan98/RiverGenerator
 
 Generator Status : ![](https://img.shields.io/badge/Project%20Status-In%20Progress-yellow.svg)
