@@ -1,3 +1,5 @@
+package com.yazan98.river.android
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,44 +204,11 @@
  *    limitations under the License.
  */
 
-apply plugin: Plugins.AndroidLibraryPlugin
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 11:37 AM
+ */
 
-android {
-    compileSdkVersion RiverAndroidDeps.CompileSdkV
-
-
-    defaultConfig {
-        minSdkVersion RiverAndroidDeps.MinSdkV
-        targetSdkVersion RiverAndroidDeps.CompileSdkV
-        versionCode RiverAndroidDeps.VersionCode
-        versionName RiverAndroidDeps.VersionName
-
-        testInstrumentationRunner RiverAndroidDeps.TestRunner
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":river-base")
-    implementation RiverAndroidDeps.AppCompat
-    testImplementation RiverAndroidDeps.Junit
-    androidTestImplementation RiverAndroidDeps.Runner
-    androidTestImplementation RiverAndroidDeps.Esspresso
-
-    implementation RiverAndroidDeps.LifecycleExtentions
-    implementation RiverAndroidDeps.ViewModel
-    implementation RiverAndroidDeps.LiveData
-
-    implementation RiverAndroidDeps.NavigationFragment
-    implementation RiverAndroidDeps.NavigationUI
-
+class Test {
 }

@@ -7,5 +7,6 @@
 object Plugins {
 
     const val JavaLibraryPlugin = "java-library"
+    const val AndroidLibraryPlugin = "com.android.library"
 
 }
