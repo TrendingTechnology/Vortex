@@ -1,3 +1,7 @@
+package com.yazan98.river.base.rx
+
+import io.reactivex.Scheduler
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,53 +206,14 @@
  *    limitations under the License.
  */
 
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/11/2019
+ * Time : 1:12 PM
+ */
 
-apply plugin: Plugins.AndroidLibraryPlugin
+interface ThreadProvider {
 
-android {
-    compileSdkVersion RiverAndroidDeps.CompileSdkV
+    fun getThreadProvider(): Scheduler
 
-
-    defaultConfig {
-        minSdkVersion RiverAndroidDeps.MinSdkV
-        targetSdkVersion RiverAndroidDeps.CompileSdkV
-        versionCode RiverAndroidDeps.VersionCode
-        versionName RiverAndroidDeps.VersionName
-
-        testInstrumentationRunner RiverAndroidDeps.TestRunner
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
-
-dependencies {
-    configuration ->
-        implementation fileTree(dir: 'libs', include: ['*.jar'])
-        implementation project(":river-base")
-        testImplementation RiverAndroidDeps.Junit
-        androidTestImplementation RiverAndroidDeps.Runner
-        androidTestImplementation RiverAndroidDeps.Esspresso
-        networkConfiguration(configuration)
-        roomConfiguration(configuration)
-}
-
-private void networkConfiguration(configuration) {
-    configuration.implementation RiverAndroidData.Retrofit
-    configuration.implementation RiverAndroidData.RetrofitLogging
-    configuration.implementation RiverAndroidData.RetrofitGsonConverter
-    configuration.implementation RiverAndroidData.RetrofitRxJavaAdapter
-    configuration.implementation RiverAndroidData.RxAndroid
-}
-
-private void roomConfiguration(configuration) {
-    configuration.implementation RiverAndroidData.RoomCommon
-    configuration.implementation RiverAndroidData.RoomRxJava2
-    configuration.annotationProcessor RiverAndroidData.RoomCompiler
 }
