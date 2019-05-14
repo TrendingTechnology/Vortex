@@ -1,3 +1,11 @@
+package com.yazan98.river.android.external.builders
+
+import android.view.Gravity
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import com.yazan98.river.android.external.R
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +210,47 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/14/2019
+ * Time : 10:53 PM
+ */
 
-//include ':river-web',
-//        ':river-web-extras'
+object ToastCreator {
+
+    fun showShortToast(context: FragmentActivity, messageId: Int) {
+        Toast.makeText(context, context.resources.getString(messageId), Toast.LENGTH_SHORT).show()
+    }
+
+    fun showLongToast(context: FragmentActivity, messageId: Int) {
+        Toast.makeText(context, context.resources.getString(messageId), Toast.LENGTH_LONG).show()
+    }
+
+    fun showShortToast(context: FragmentActivity, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showLongToast(context: FragmentActivity, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun showSuccessToast(context: FragmentActivity, messageId: Int) {
+        createCustomToast(context, messageId, R.color.green)
+    }
+
+    fun showErrorToast(context: FragmentActivity, messageId: Int) {
+        createCustomToast(context, messageId, R.color.red)
+    }
+
+    private fun createCustomToast(context: FragmentActivity, messageId: Int, colorId: Int) {
+        val toast = Toast(context)
+        val toastView = toast.view
+        val toastMessage = toastView.findViewById<TextView>(R.id.ToastMessage)
+        toastMessage.text = context.resources.getString(messageId)
+        toast.duration = Toast.LENGTH_SHORT
+        toastMessage.gravity = Gravity.CENTER
+        toastMessage.setBackgroundColor(context.resources.getColor(colorId))
+        toast.show()
+    }
+
+}

@@ -1,3 +1,12 @@
+package com.yazan98.river.android.external.builders
+
+import android.view.View
+import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
+import com.google.android.material.snackbar.Snackbar
+import com.yazan98.river.android.external.R
+
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +211,37 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/14/2019
+ * Time : 11:11 PM
+ */
 
-//include ':river-web',
-//        ':river-web-extras'
+object SnackbarCreator {
+
+    fun showShortSnackbar(context: FragmentActivity, messageId: Int, view: View) {
+        Snackbar.make(view, context.resources.getText(messageId), Snackbar.LENGTH_SHORT).show()
+    }
+
+    fun showLongSnackbar(context: FragmentActivity, messageId: Int, view: View) {
+        Snackbar.make(view, context.resources.getText(messageId), Snackbar.LENGTH_LONG).show()
+    }
+
+    fun createSuccessSnakebar(context: FragmentActivity, messageId: Int, view: View) {
+        createCustomSnackbar(context, messageId, view, R.color.green)
+    }
+
+    fun createFailedSnackbar(context: FragmentActivity, messageId: Int, view: View) {
+        createCustomSnackbar(context, messageId, view, R.color.red)
+    }
+
+    fun createCustomSnackbar(context: FragmentActivity, messageId: Int, view: View, backgroundColor: Int) {
+        val snackbar: Snackbar = Snackbar.make(view, context.resources.getText(messageId), Snackbar.LENGTH_SHORT)
+        val snackBarView = snackbar.view
+        snackBarView.setBackgroundColor(context.resources.getColor(backgroundColor))
+        val textView = snackBarView.findViewById<View>(R.id.ToastMessage) as TextView
+        textView.setTextColor(context.resources.getColor(R.color.wi))
+        snackbar.show()
+    }
+
+}
