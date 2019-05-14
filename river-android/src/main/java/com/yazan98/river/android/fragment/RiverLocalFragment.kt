@@ -1,3 +1,5 @@
+package com.yazan98.river.android.fragment
+import com.yazan98.river.android.base.BaseFragment
 import com.yazan98.river.base.presenter.RiverPresenter
 import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.LocalView

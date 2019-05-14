@@ -1,3 +1,5 @@
+package com.yazan98.river.android.screen
+import com.yazan98.river.android.base.BaseScreen
 import com.yazan98.river.base.presenter.RiverPresenter
 import com.yazan98.river.base.view.LocalView
 

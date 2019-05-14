@@ -1,5 +1,6 @@
+package com.yazan98.river.base.rx
+
 import io.reactivex.*
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 /**
@@ -254,6 +255,30 @@ class RxProvider<Request> {
         return request
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.newThread())
+    }
+
+    fun getObservableRequest(request: Observable<Request>, schedulers: Scheduler): Observable<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(schedulers)
+    }
+
+    fun getFlowableRequest(request: Flowable<Request> , schedulers: Scheduler): Flowable<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(schedulers)
+    }
+
+    fun getSingleRequest(request: Single<Request> , schedulers: Scheduler): Single<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(schedulers)
+    }
+
+    fun getMaybeRequest(request: Maybe<Request> , schedulers: Scheduler): Maybe<Request> {
+        return request
+            .subscribeOn(Schedulers.io())
+            .observeOn(schedulers)
     }
 
 }

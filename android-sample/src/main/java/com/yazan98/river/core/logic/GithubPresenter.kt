@@ -1,16 +1,12 @@
-package com.yazan98.river.base.presenter
+package com.yazan98.river.core.logic
 
-import com.yazan98.river.base.RiverConsts
-import com.yazan98.river.base.error.ViewNotAttatchedError
-import com.yazan98.river.base.presenter.base.Presenter
-import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
-import com.yazan98.river.base.rx.RxManager
-import com.yazan98.river.base.view.BaseView
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.subjects.BehaviorSubject
-import java.util.concurrent.atomic.AtomicBoolean
+import android.util.Log
+import com.yazan98.river.base.interactor.subscribers.ObservableSubscriber
+import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.presenter.RiverRxPresenter
+import com.yazan98.river.core.data.GithubRepo
+import com.yazan98.river.core.domain.GithubUser
+import com.yazan98.river.core.domain.GithubUserInteractor
 
 /**
  *                                  Apache License
@@ -218,56 +214,35 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/11/2019
- * Time : 1:08 AM
+ * Date : 5/14/2019
+ * Time : 11:58 PM
  */
 
-open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
+class GithubPresenter : RiverRxPresenter<GithubView>() {
 
-    private lateinit var view: View
-    private val viewStatus: AtomicBoolean = AtomicBoolean(false)
-    private val reactiveManager: RxManager = RxManager()
-    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
+    private val interactor: GithubUserInteractor = GithubUserInteractor()
+    private val repo: GithubRepo = GithubRepo()
 
-    override fun getView(): View {
-        if (::view.isInitialized) {
-            return view
-        } else {
-            throw ViewNotAttatchedError(
-                RiverConsts.VIEW_NULL
-            )
+    init {
+        interactor.callback = object : ObservableSubscriber<GithubUser>() {
+            override fun onComplete() {
+                changePresenterStatus(PresenterStatus.LOADED)
+            }
+
+            override fun onNext(t: GithubUser) {
+                getView().onGithubSuccess(t)
+            }
+
+            override fun onError(e: Throwable) {
+                getView().onError(e)
+            }
+
         }
     }
 
-    override fun getViewStatus(): Boolean {
-        return this.viewStatus.get()
+    fun getUser() {
+        Log.e("Github Screen " , "Get User Presenter")
+        changePresenterStatus(PresenterStatus.LOADING)
+        interactor.executeRequest(repo.getUser())
     }
-
-    override fun addRxRequest(request: Disposable) {
-        reactiveManager.addRequest(request)
-    }
-
-    override fun destroyRxPresenter() {
-        reactiveManager.clearRequests()
-    }
-
-    override fun attachView(v: View) {
-        changeViewStatus(true)
-        this.view = v
-    }
-
-    override fun changeViewStatus(newStatus: Boolean) {
-        this.viewStatus.set(newStatus)
-    }
-
-    override fun changePresenterStatus(newStatus: PresenterStatus) {
-        synchronized(newStatus) {
-            this.presenterStatusSubject.onNext(newStatus)
-        }
-    }
-
-    override fun getPresenterStatus(): Observable<PresenterStatus> {
-        return this.presenterStatusSubject
-    }
-
 }

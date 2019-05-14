@@ -1,6 +1,7 @@
 package com.yazan98.river.base.interactor.interactors
 
 import com.yazan98.river.base.interactor.RiverInteractor
+import com.yazan98.river.base.rx.RxProvider
 import io.reactivex.Maybe
 
 /**
@@ -213,4 +214,6 @@ import io.reactivex.Maybe
  * Time : 12:26 AM
  */
 
-interface MaybeInteractor<Request ,in Params>: RiverInteractor<Maybe<Request>, Params>
+abstract class MaybeInteractor<Request ,in Params>: RiverInteractor<Maybe<Request>, Params>() {
+    val provider: RxProvider<Request> = RxProvider()
+}

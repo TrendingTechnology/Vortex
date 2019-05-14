@@ -1,5 +1,7 @@
 package com.yazan98.river.base.interactor
 
+import com.yazan98.river.base.rx.RxProvider
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -210,5 +212,4 @@ package com.yazan98.river.base.interactor
  * Time : 12:20 AM
  */
 
-interface Interactor {
-}
+interface Interactor

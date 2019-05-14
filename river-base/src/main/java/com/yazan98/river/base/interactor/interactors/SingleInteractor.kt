@@ -1,6 +1,7 @@
 package com.yazan98.river.base.interactor.interactors
 
 import com.yazan98.river.base.interactor.RiverInteractor
+import com.yazan98.river.base.rx.RxProvider
 import io.reactivex.Single
 
 /**
@@ -213,4 +214,7 @@ import io.reactivex.Single
  * Time : 12:25 AM
  */
 
-interface SingleInteractor<Request ,in Params> : RiverInteractor<Single<Request>, Params>
+abstract class SingleInteractor<Request ,in Params> : RiverInteractor<Single<Request>, Params>() {
+    val provider: RxProvider<Request> = RxProvider()
+}
+

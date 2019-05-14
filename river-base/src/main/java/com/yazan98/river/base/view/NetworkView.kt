@@ -213,10 +213,4 @@ import com.yazan98.river.base.utils.ComponentVisibility
  * Time : 1:06 AM
  */
 
-interface NetworkView : BaseView {
-
-    fun onPreOperation()
-
-    fun componentVisibility(type: ComponentVisibility)
-
-}
+interface NetworkView : BaseView

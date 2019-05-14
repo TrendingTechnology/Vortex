@@ -1,5 +1,6 @@
 package com.yazan98.river.base.interactor
 
+import com.yazan98.river.base.rx.RxProvider
 import io.reactivex.disposables.Disposable
 
 /**
@@ -206,10 +207,9 @@ import io.reactivex.disposables.Disposable
  *    limitations under the License.
  */
 
-interface RiverInteractor<Request ,in Params>: Interactor {
+abstract class RiverInteractor<Request ,in Params>: Interactor {
 
-    fun validateParams(params: Params)
-
-    fun executeRequest(request: Request): Disposable
+    abstract fun validateParams(params: Params)
+    abstract fun executeRequest(request: Request): Disposable
 
 }

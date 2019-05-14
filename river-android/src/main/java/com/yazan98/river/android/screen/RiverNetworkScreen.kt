@@ -1,5 +1,7 @@
+package com.yazan98.river.android.screen
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.yazan98.river.android.base.BaseScreen
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.base.view.NetworkView
 

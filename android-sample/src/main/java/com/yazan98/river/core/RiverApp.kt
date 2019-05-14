@@ -1,8 +1,8 @@
-package com.yazan98.river.android.base
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import com.yazan98.river.base.view.BaseView
+package com.yazan98.river.core
+
+import android.content.Context
+import com.yazan98.river.android.common.application.RiverApplicationConfiguration
+import com.yazan98.river.android.common.application.app.RiverMultiApplication
 
 /**
  *    Copyright [2019] [Yazan Tarifi]
@@ -20,15 +20,20 @@ import com.yazan98.river.base.view.BaseView
  *    limitations under the License.
  */
 
-abstract class BaseScreen : AppCompatActivity(), LifecycleOwner, BaseView {
+class RiverApp : RiverMultiApplication() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(getLayoutRes())
+    override fun onCreate() {
+        super.onCreate()
+
+        RiverApplicationConfiguration.LocalBuilder()
+            .enableStrictMode(true)
+            .withCompatVectorEnabled()
+            .withPicassoCachingImages(this)
+
+
     }
 
-    protected fun getArgs(): Bundle {
-        return intent!!.extras!!
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
     }
-
 }

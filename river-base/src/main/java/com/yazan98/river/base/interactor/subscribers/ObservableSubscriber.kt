@@ -1,5 +1,7 @@
 package com.yazan98.river.base.interactor.subscribers
 
+import io.reactivex.observers.DisposableObserver
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -210,5 +212,4 @@ package com.yazan98.river.base.interactor.subscribers
  * Time : 12:30 AM
  */
 
-class ObservableSubscriber {
-}
+abstract class ObservableSubscriber<Response> : DisposableObserver<Response>()

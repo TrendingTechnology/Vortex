@@ -1,8 +1,6 @@
-package com.yazan98.river.android.base
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import com.yazan98.river.base.view.BaseView
+package com.yazan98.river.core.ui
+import com.yazan98.river.android.router.RiverAndroidRouter
+import com.yazan98.river.base.router.RouterAction
 
 /**
  *    Copyright [2019] [Yazan Tarifi]
@@ -20,15 +18,9 @@ import com.yazan98.river.base.view.BaseView
  *    limitations under the License.
  */
 
-abstract class BaseScreen : AppCompatActivity(), LifecycleOwner, BaseView {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(getLayoutRes())
-    }
-
-    protected fun getArgs(): Bundle {
-        return intent!!.extras!!
+class GithubRouter : RiverAndroidRouter<RouterAction>() {
+    override fun acceptRouterAction(action: RouterAction) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

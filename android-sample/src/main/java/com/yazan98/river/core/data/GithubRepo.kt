@@ -1,16 +1,9 @@
-package com.yazan98.river.base.presenter
+package com.yazan98.river.core.data
 
-import com.yazan98.river.base.RiverConsts
-import com.yazan98.river.base.error.ViewNotAttatchedError
-import com.yazan98.river.base.presenter.base.Presenter
-import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
-import com.yazan98.river.base.rx.RxManager
-import com.yazan98.river.base.view.BaseView
+import com.yazan98.river.core.domain.GithubUser
+import com.yazan98.river.data.network.BaseRepository
+import com.yazan98.river.data.network.RetrofitProvider
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.subjects.BehaviorSubject
-import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  *                                  Apache License
@@ -218,56 +211,26 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/11/2019
- * Time : 1:08 AM
+ * Date : 5/14/2019
+ * Time : 11:54 PM
  */
 
-open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
+class GithubRepo : BaseRepository<GithubApi>() {
 
-    private lateinit var view: View
-    private val viewStatus: AtomicBoolean = AtomicBoolean(false)
-    private val reactiveManager: RxManager = RxManager()
-    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
-
-    override fun getView(): View {
-        if (::view.isInitialized) {
-            return view
-        } else {
-            throw ViewNotAttatchedError(
-                RiverConsts.VIEW_NULL
-            )
-        }
+    init {
+        retrofit = RetrofitProvider.createRetrofitWithRxJavaAndClient(getBaseUrl())
     }
 
-    override fun getViewStatus(): Boolean {
-        return this.viewStatus.get()
+    override fun getService(): GithubApi {
+        return retrofit.create(GithubApi::class.java)
     }
 
-    override fun addRxRequest(request: Disposable) {
-        reactiveManager.addRequest(request)
+    fun getUser(): Observable<GithubUser> {
+        return getService().getUserByName()
     }
 
-    override fun destroyRxPresenter() {
-        reactiveManager.clearRequests()
-    }
-
-    override fun attachView(v: View) {
-        changeViewStatus(true)
-        this.view = v
-    }
-
-    override fun changeViewStatus(newStatus: Boolean) {
-        this.viewStatus.set(newStatus)
-    }
-
-    override fun changePresenterStatus(newStatus: PresenterStatus) {
-        synchronized(newStatus) {
-            this.presenterStatusSubject.onNext(newStatus)
-        }
-    }
-
-    override fun getPresenterStatus(): Observable<PresenterStatus> {
-        return this.presenterStatusSubject
+    override fun getBaseUrl(): String {
+        return "https://api.github.com/"
     }
 
 }

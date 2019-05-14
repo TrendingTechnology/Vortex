@@ -1,5 +1,6 @@
 package com.yazan98.river.base.interactor.interactors
 import com.yazan98.river.base.interactor.RiverInteractor
+import com.yazan98.river.base.rx.RxProvider
 import io.reactivex.Flowable
 
 /**
@@ -212,4 +213,6 @@ import io.reactivex.Flowable
  * Time : 12:24 AM
  */
 
-interface FlowableInteractor<Request , in Params>: RiverInteractor<Flowable<Request>, Params>
+abstract class FlowableInteractor<Request , in Params>: RiverInteractor<Flowable<Request>, Params>() {
+    val provider: RxProvider<Request> = RxProvider()
+}

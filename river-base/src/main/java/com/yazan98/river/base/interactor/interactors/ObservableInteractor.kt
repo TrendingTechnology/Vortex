@@ -1,6 +1,8 @@
 package com.yazan98.river.base.interactor.interactors
 
 import com.yazan98.river.base.interactor.RiverInteractor
+import com.yazan98.river.base.interactor.subscribers.ObservableSubscriber
+import com.yazan98.river.base.rx.RxProvider
 import io.reactivex.Observable
 
 /**
@@ -213,4 +215,9 @@ import io.reactivex.Observable
  * Time : 12:23 AM
  */
 
-interface ObservableInteractor<Request , in Params>: RiverInteractor<Observable<Request>, Params>
+abstract class ObservableInteractor<Request , in Params>: RiverInteractor<Observable<Request>, Params>() {
+
+    val provider: RxProvider<Request> = RxProvider()
+    lateinit var callback : ObservableSubscriber<Request>
+
+}

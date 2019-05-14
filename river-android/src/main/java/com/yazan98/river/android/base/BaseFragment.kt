@@ -1,3 +1,4 @@
+package com.yazan98.river.android.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

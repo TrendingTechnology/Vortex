@@ -1,16 +1,7 @@
-package com.yazan98.river.base.presenter
+package com.yazan98.river.core.logic
 
-import com.yazan98.river.base.RiverConsts
-import com.yazan98.river.base.error.ViewNotAttatchedError
-import com.yazan98.river.base.presenter.base.Presenter
-import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
-import com.yazan98.river.base.rx.RxManager
-import com.yazan98.river.base.view.BaseView
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
-import io.reactivex.subjects.BehaviorSubject
-import java.util.concurrent.atomic.AtomicBoolean
+import com.yazan98.river.base.view.NetworkView
+import com.yazan98.river.core.domain.GithubUser
 
 /**
  *                                  Apache License
@@ -218,56 +209,12 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/11/2019
- * Time : 1:08 AM
+ * Date : 5/14/2019
+ * Time : 11:58 PM
  */
 
-open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
+interface GithubView : NetworkView {
 
-    private lateinit var view: View
-    private val viewStatus: AtomicBoolean = AtomicBoolean(false)
-    private val reactiveManager: RxManager = RxManager()
-    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
-
-    override fun getView(): View {
-        if (::view.isInitialized) {
-            return view
-        } else {
-            throw ViewNotAttatchedError(
-                RiverConsts.VIEW_NULL
-            )
-        }
-    }
-
-    override fun getViewStatus(): Boolean {
-        return this.viewStatus.get()
-    }
-
-    override fun addRxRequest(request: Disposable) {
-        reactiveManager.addRequest(request)
-    }
-
-    override fun destroyRxPresenter() {
-        reactiveManager.clearRequests()
-    }
-
-    override fun attachView(v: View) {
-        changeViewStatus(true)
-        this.view = v
-    }
-
-    override fun changeViewStatus(newStatus: Boolean) {
-        this.viewStatus.set(newStatus)
-    }
-
-    override fun changePresenterStatus(newStatus: PresenterStatus) {
-        synchronized(newStatus) {
-            this.presenterStatusSubject.onNext(newStatus)
-        }
-    }
-
-    override fun getPresenterStatus(): Observable<PresenterStatus> {
-        return this.presenterStatusSubject
-    }
+    fun onGithubSuccess(data: GithubUser)
 
 }

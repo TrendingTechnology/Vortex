@@ -36,4 +36,6 @@ object RiverAndroidDeps {
 
     const val NavigationFragment = "androidx.navigation:navigation-fragment-ktx:2.0.0"
     const val NavigationUI = "androidx.navigation:navigation-ui-ktx:2.0.0"
+
+    const val ConstraintLayout = "com.android.support.constraint:constraint-layout:1.1.3"
 }
