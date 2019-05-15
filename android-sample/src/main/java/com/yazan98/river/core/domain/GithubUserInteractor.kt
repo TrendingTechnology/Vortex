@@ -1,7 +1,6 @@
 package com.yazan98.river.core.domain
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.yazan98.river.base.interactor.interactors.ObservableInteractor
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

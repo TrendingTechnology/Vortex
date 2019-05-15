@@ -31,4 +31,10 @@ abstract class BaseFragment: Fragment() , LifecycleOwner , BaseView {
         return inflater.inflate(getLayoutRes() , container , false)
     }
 
+    @CallSuper
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initScreen()
+    }
+
 }

@@ -67,7 +67,7 @@ class GithubScreen : RiverNetworkScreen<GithubView, GithubPresenter, GithubRoute
             textView.visibility = View.INVISIBLE
             textView2.visibility = View.INVISIBLE
             Progress.visibility = View.VISIBLE
-        } else if (status == PresenterStatus.LOADED) {
+        } else if (status == PresenterStatus.FINISHED) {
             imageView.visibility = View.VISIBLE
             textView.visibility = View.VISIBLE
             textView2.visibility = View.VISIBLE

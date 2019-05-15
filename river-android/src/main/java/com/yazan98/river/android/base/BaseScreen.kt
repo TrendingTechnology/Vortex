@@ -25,6 +25,7 @@ abstract class BaseScreen : AppCompatActivity(), LifecycleOwner, BaseView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutRes())
+        initScreen()
     }
 
     protected fun getArgs(): Bundle {

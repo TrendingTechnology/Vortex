@@ -26,13 +26,13 @@ import com.yazan98.river.base.view.NetworkView
 
 abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>, Router> : BaseFragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): android.view.View? {
-        handlePresenterStatus()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        handlePresenterStatus()
     }
 
     @SuppressLint("CheckResult")
