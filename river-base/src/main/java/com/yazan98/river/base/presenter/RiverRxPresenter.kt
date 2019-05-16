@@ -2,13 +2,11 @@ package com.yazan98.river.base.presenter
 
 import com.yazan98.river.base.RiverConsts
 import com.yazan98.river.base.error.ViewNotAttatchedError
-import com.yazan98.river.base.presenter.base.Presenter
 import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
 import com.yazan98.river.base.rx.RxManager
 import com.yazan98.river.base.view.BaseView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -39,7 +37,7 @@ open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
 
     private lateinit var view: View
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
-    private val reactiveManager: RxManager = RxManager()
+    val reactiveManager: RxManager = RxManager()
     private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
 
     override fun getView(): View {
