@@ -1,6 +1,4 @@
-package com.yazan98.river.web.common.firebase
-
-import java.io.Serializable
+package com.yazan98.river.base.error
 
 /**
  *                                  Apache License
@@ -209,19 +207,7 @@ import java.io.Serializable
 /**
  * Created By : Yazan Tarifi
  * Date : 5/17/2019
- * Time : 2:34 PM
+ * Time : 4:20 PM
  */
 
-data class FirebaseDetails(
-    val type: String,
-    val projectId: String,
-    val projectPrivateKey: String,
-    val privateKey: String,
-    val ClientEmail: String,
-    val ClientId: String,
-    val authUri: String,
-    val tokenUri: String,
-    val authProviderx509: String,
-    val Clientx509: String,
-    val privateKeyId: String
-) : Serializable
+class UnauthrizedError(override val message: String) : RiverError(message)
