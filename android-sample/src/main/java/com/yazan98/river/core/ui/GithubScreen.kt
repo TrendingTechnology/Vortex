@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.screen_github.*
  *    limitations under the License.
  */
 
-class GithubScreen : RiverNetworkScreen<GithubView, GithubPresenter, GithubRouter>(), GithubView {
+class GithubScreen : RiverNetworkScreen<GithubView, GithubPresenter>(), GithubView {
 
     private var presenter: GithubPresenter = GithubPresenter()
     private lateinit var viewModel: GithubViewModel
@@ -42,10 +42,6 @@ class GithubScreen : RiverNetworkScreen<GithubView, GithubPresenter, GithubRoute
 
     override fun getPresenter(): GithubPresenter {
         return presenter
-    }
-
-    override fun getRouter(): GithubRouter {
-        return GithubRouter()
     }
 
     override fun initScreen() {

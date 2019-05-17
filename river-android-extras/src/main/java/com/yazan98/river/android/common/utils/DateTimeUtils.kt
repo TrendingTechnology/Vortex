@@ -48,4 +48,8 @@ object DateTimeUtils {
         return date.toString()
     }
 
+    fun getDate(date: Date): String {
+        return "${date.day}/${date.month}/${date.year}"
+    }
+
 }
