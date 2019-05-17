@@ -1,6 +1,6 @@
 # River-Core
-Base Code to Generated Applications From River Generator Based on RxJava and Viper Architecture
-
+Base Code To Build Android Applications With RxJava , Clean Architecture and VIPER Architecture
+ 
 ![appveyor](https://img.shields.io/appveyor/ci/Yazan98/River-Core.svg)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)
 ![Status](https://img.shields.io/badge/Project%20Status-Beta%20Version-yellow.svg)
@@ -60,9 +60,3 @@ VIPER Architecture Components
 6. Local Calls With Room 
 7. UI Utils (Image Loaders / Utils)
 8. Permissions
-
-# Usage 
-To Build Full Android Application From "River Generator"
-> River Generator -> https://www.github.com/Yazan98/RiverGenerator
-
-Generator Status : ![](https://img.shields.io/badge/Project%20Status-In%20Progress-yellow.svg)

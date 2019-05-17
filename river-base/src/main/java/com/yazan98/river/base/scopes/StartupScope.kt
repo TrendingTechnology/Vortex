@@ -24,4 +24,4 @@ import java.lang.annotation.Target
 
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.TYPE, ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.METHOD)
-annotation class InitializerScope
+annotation class StartupScope

@@ -1,7 +1,6 @@
 package com.yazan98.river.base.presenter.base
 
-import com.yazan98.river.base.presenter.PresenterStatus
-import com.yazan98.river.base.scopes.InitializerScope
+import com.yazan98.river.base.scopes.StartupScope
 import com.yazan98.river.base.view.BaseView
 
 
@@ -33,7 +32,7 @@ interface RiverPresenterImpl<V : BaseView>: Presenter {
 
     fun getViewStatus(): Boolean
 
-    @InitializerScope
+    @StartupScope
     fun attachView(v: V)
 
     fun changeViewStatus(newStatus: Boolean)
