@@ -29,6 +29,4 @@ interface RiverDatabaseConfigure<Info> {
 
     fun getDatabaseType(): String
 
-    fun executeConfiguration()
-
 }
