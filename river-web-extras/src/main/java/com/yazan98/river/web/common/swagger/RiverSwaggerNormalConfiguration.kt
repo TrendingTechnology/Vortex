@@ -1,3 +1,13 @@
+package com.yazan98.river.web.common.swagger
+
+import org.springframework.context.annotation.Bean
+import springfox.documentation.builders.PathSelectors
+import springfox.documentation.builders.RequestHandlerSelectors
+import springfox.documentation.service.ApiInfo
+import springfox.documentation.service.VendorExtension
+import springfox.documentation.spi.DocumentationType
+import springfox.documentation.spring.web.plugins.Docket
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +212,33 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 12:27 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+abstract class RiverSwaggerNormalConfiguration : SwaggerConfig {
+
+    @Bean
+    override fun ProvideSwaggerConfiguration(): Docket {
+        return Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(PathSelectors.any())
+            .build()
+            .apiInfo(
+                ApiInfo(
+                    getSwaggerDetails().title,
+                    getSwaggerDetails().description,
+                    getSwaggerDetails().version,
+                    getSwaggerDetails().termsOfServiceUrl,
+                    getSwaggerDetails().contact,
+                    getSwaggerDetails().license,
+                    getSwaggerDetails().licenseUrl,
+                    getSwaggerDetails().vendorExtensions as MutableCollection<VendorExtension<Any>>
+                )
+            )
+    }
+
+}

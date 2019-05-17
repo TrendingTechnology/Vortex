@@ -81,4 +81,8 @@ open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
         return this.presenterStatusSubject
     }
 
+    public override fun destroyPresenter() {
+        reactiveManager.clearRequests()
+    }
+
 }

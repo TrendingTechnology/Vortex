@@ -1,3 +1,8 @@
+package com.yazan98.river.web.common.swagger
+
+import springfox.documentation.service.Contact
+import java.io.Serializable
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +207,19 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 12:31 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+data class SwaggerDetails(
+    val title: String,
+    val description: String,
+    val version: String,
+    val termsOfServiceUrl: String,
+    val contact: Contact,
+    val license: String,
+    val licenseUrl: String,
+    val vendorExtensions: Collection<Any>
+) : Serializable

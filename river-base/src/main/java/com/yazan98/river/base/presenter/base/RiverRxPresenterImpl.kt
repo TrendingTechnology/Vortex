@@ -38,4 +38,6 @@ interface RiverRxPresenterImpl<View: BaseView> : RiverPresenterImpl<View> {
 
     fun getPresenterStatus(): Observable<PresenterStatus>
 
+    fun destroyPresenter()
+
 }

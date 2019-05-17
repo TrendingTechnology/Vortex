@@ -1,3 +1,13 @@
+package com.yazan98.river.web.common.firebase
+
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
+import org.springframework.context.annotation.Bean
+import java.io.FileInputStream
+import java.nio.charset.StandardCharsets
+
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +212,48 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 2:34 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+abstract class RiverFirebaseConfiguration : FirebaseConfigure {
+
+    private lateinit var serviceAccount: FileInputStream
+
+    @Bean
+    override fun buildFirebaseApp(): FirebaseApp {
+        val firebaseJsonFile: String = "{" +
+                "  \"type\": ${getApplicationDetails().type}," +
+                "  \"project_id\": ${getApplicationDetails().projectId} ," +
+                "  \"private_key_id\": ${getApplicationDetails().privateKeyId},\n" +
+                "  \"private_key\": ${getApplicationDetails().privateKey}," +
+                "  \"client_email\": ${getApplicationDetails().ClientEmail}," +
+                "  \"client_id\": ${getApplicationDetails().ClientId}," +
+                "  \"auth_uri\": ${getApplicationDetails().authUri}," +
+                "  \"token_uri\": ${getApplicationDetails().tokenUri}," +
+                "  \"auth_provider_x509_cert_url\": ${getApplicationDetails().authProviderx509}," +
+                "  \"client_x509_cert_url\": ${getApplicationDetails().Clientx509}" +
+                "}"
+
+        serviceAccount = FileInputStream(firebaseJsonFile)
+
+        val options = FirebaseOptions.Builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .setDatabaseUrl(getDatabaseUrl())
+            .build()
+
+        try {
+            FirebaseApp.initializeApp(options)
+            println("Firebase Configuration Done!!!")
+        } catch (ex: Exception) {
+            println("Something Wrong With Firebase Configuration : ${ex.message}")
+            ex.printStackTrace()
+        }
+
+        return FirebaseApp.getInstance()
+    }
+
+    protected abstract fun getDatabaseUrl(): String
+}

@@ -1,3 +1,7 @@
+package com.yazan98.river.web.common.firebase
+
+import java.io.Serializable
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +206,22 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 2:34 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+data class FirebaseDetails(
+    val type: String,
+    val projectId: String,
+    val projectPrivateKey: String,
+    val privateKey: String,
+    val ClientEmail: String,
+    val ClientId: String,
+    val authUri: String,
+    val tokenUri: String,
+    val authProviderx509: String,
+    val Clientx509: String,
+    val privateKeyId: String
+) : Serializable

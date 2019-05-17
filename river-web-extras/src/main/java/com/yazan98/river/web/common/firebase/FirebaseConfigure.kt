@@ -1,3 +1,7 @@
+package com.yazan98.river.web.common.firebase
+
+import com.google.firebase.FirebaseApp
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +206,16 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 2:44 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+interface FirebaseConfigure {
+
+    fun getApplicationDetails(): FirebaseDetails
+
+    fun buildFirebaseApp(): FirebaseApp
+
+}

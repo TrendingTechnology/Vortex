@@ -1,3 +1,12 @@
+package com.yazan98.river.web.common.firebase
+
+import com.google.auth.oauth2.GoogleCredentials
+import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseOptions
+import org.springframework.context.annotation.Bean
+import java.io.FileInputStream
+
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +211,30 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 2:47 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+abstract class RiverFIrebasePathConfiguration {
+
+    private lateinit var serviceAccount: FileInputStream
+    private lateinit var options: FirebaseOptions
+
+    @Bean
+    fun buildFirebaseApp(): FirebaseApp {
+        serviceAccount = FileInputStream(getJsonPath())
+        options = FirebaseOptions.Builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .setDatabaseUrl(getDatabaseUrl())
+            .build()
+
+        FirebaseApp.initializeApp(options)
+        return FirebaseApp.getInstance()
+    }
+
+    protected abstract fun getJsonPath(): String
+    protected abstract fun getDatabaseUrl(): String
+
+}

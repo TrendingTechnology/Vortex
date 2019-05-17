@@ -1,3 +1,8 @@
+package com.yazan98.river.web.common.swagger
+
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -202,12 +207,20 @@
  *    limitations under the License.
  */
 
-include ':android-sample',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-external',
-        ':river-android-data'
+/**
+ * Created By : Yazan Tarifi
+ * Date : 5/17/2019
+ * Time : 2:38 PM
+ */
 
-include ':river-web',
-        ':river-web-extras'
+class RiverSwaggerAdapter : WebMvcConfigurerAdapter() {
+
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry.addResourceHandler("swagger-ui.html")
+            .addResourceLocations("classpath:/META-INF/resources/")
+
+        registry.addResourceHandler("/webjars/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/")
+    }
+
+}
