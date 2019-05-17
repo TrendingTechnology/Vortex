@@ -24,7 +24,7 @@ import com.yazan98.river.base.view.NetworkView
  *    limitations under the License.
  */
 
-abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>, Router> : BaseFragment() {
+abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>> : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
         return super.onCreateView(inflater, container, savedInstanceState)
@@ -43,6 +43,5 @@ abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPrese
     }
 
     protected abstract fun getPresenter(): Presenter
-    protected abstract fun getRouter(): Router
 
 }

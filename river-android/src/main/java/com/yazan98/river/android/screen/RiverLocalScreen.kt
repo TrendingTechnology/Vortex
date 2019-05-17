@@ -19,9 +19,8 @@ import com.yazan98.river.base.view.LocalView
  *    limitations under the License.
  */
 
-abstract class RiverLocalScreen<View: LocalView , Presenter: RiverPresenter<View> , Router>: BaseScreen() {
+abstract class RiverLocalScreen<View: LocalView , Presenter: RiverPresenter<View>>: BaseScreen() {
 
     protected abstract fun getPresenter(): Presenter
-    protected abstract fun getRouter(): Router
 
 }

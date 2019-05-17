@@ -21,7 +21,7 @@ import com.yazan98.river.base.view.NetworkView
  *    limitations under the License.
  */
 
-abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View> , Router>: BaseScreen() {
+abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View>>: BaseScreen() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +36,5 @@ abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresente
     }
 
     protected abstract fun getPresenter(): Presenter
-    protected abstract fun getRouter(): Router
 
 }
