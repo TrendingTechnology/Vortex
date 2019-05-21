@@ -5,7 +5,7 @@ Base Code To Build Android Applications With RxJava , Clean Architecture and VIP
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)
 ![Status](https://img.shields.io/badge/Project%20Status-Beta%20Version-yellow.svg)
 ![AndroidX](https://img.shields.io/badge/Android%20Status-AndroidX-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.6-green.svg)
+![Version](https://img.shields.io/badge/Version-0.0.7-green.svg)
 
 
 > Build Full Applications With One Library 
@@ -29,10 +29,10 @@ Build.gradle
 
 ```
     dependencies {
-        implementation "com.yazan98.river.core:river-base-ktx:0.0.6"
-        implementation "com.yazan98.river.core:river-android-ktx:0.0.6"
-        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.6"
-        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.6"
+        implementation "com.yazan98.river.core:river-base-ktx:0.0.7"
+        implementation "com.yazan98.river.core:river-android-ktx:0.0.7"
+        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.7"
+        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.7"
     }
 ```
 
