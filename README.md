@@ -60,3 +60,8 @@ VIPER Architecture Components
 6. Local Calls With Room 
 7. UI Utils (Image Loaders / Utils)
 8. Permissions
+
+# Usage
+
+The Following Link have simple example about how to use library
+> https://github.com/Yazan98/River-Android-Sample
