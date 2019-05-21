@@ -28,13 +28,8 @@ import com.yazan98.river.base.scopes.StartupScope
 
 interface BaseView {
 
-    @StartupScope
-    fun initScreen()
-
     fun acceptPresenterStatus(status: PresenterStatus)
 
     fun onError(error: Throwable)
-
-    fun getLayoutRes(): Int
 
 }

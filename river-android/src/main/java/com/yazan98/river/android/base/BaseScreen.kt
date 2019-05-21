@@ -2,6 +2,7 @@ package com.yazan98.river.android.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
+import com.yazan98.river.base.scopes.StartupScope
 import com.yazan98.river.base.view.BaseView
 
 /**
@@ -20,7 +21,7 @@ import com.yazan98.river.base.view.BaseView
  *    limitations under the License.
  */
 
-abstract class BaseScreen : AppCompatActivity(), LifecycleOwner, BaseView {
+abstract class BaseScreen : AppCompatActivity(), LifecycleOwner{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +32,10 @@ abstract class BaseScreen : AppCompatActivity(), LifecycleOwner, BaseView {
     protected fun getArgs(): Bundle {
         return intent!!.extras!!
     }
+
+    @StartupScope
+    protected abstract fun initScreen()
+
+    protected abstract fun getLayoutRes(): Int
 
 }

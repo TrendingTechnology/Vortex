@@ -20,7 +20,7 @@ import com.yazan98.river.base.view.LocalView
  *    limitations under the License.
  */
 
-abstract class RiverLocalFragment<View: LocalView , Presenter : RiverPresenter<View>>: BaseFragment() {
+abstract class RiverLocalFragment<View: LocalView , Presenter : RiverPresenter<View>>: BaseFragment(), BaseView  {
 
     protected abstract fun getPresenter(): Presenter
 

@@ -1,6 +1,7 @@
 package com.yazan98.river.android.screen
 import com.yazan98.river.android.base.BaseScreen
 import com.yazan98.river.base.presenter.RiverPresenter
+import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.LocalView
 
 /**
@@ -19,7 +20,7 @@ import com.yazan98.river.base.view.LocalView
  *    limitations under the License.
  */
 
-abstract class RiverLocalScreen<View: LocalView , Presenter: RiverPresenter<View>>: BaseScreen() {
+abstract class RiverLocalScreen<View: LocalView , Presenter: RiverPresenter<View>>: BaseScreen(), BaseView {
 
     protected abstract fun getPresenter(): Presenter
 

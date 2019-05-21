@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.yazan98.river.base.scopes.StartupScope
 import com.yazan98.river.base.view.BaseView
 
 /**
@@ -24,7 +25,7 @@ import com.yazan98.river.base.view.BaseView
  *    limitations under the License.
  */
 
-abstract class BaseFragment: Fragment() , LifecycleOwner , BaseView {
+abstract class BaseFragment: Fragment() , LifecycleOwner {
 
     @CallSuper
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,5 +37,10 @@ abstract class BaseFragment: Fragment() , LifecycleOwner , BaseView {
         super.onViewCreated(view, savedInstanceState)
         initScreen()
     }
+
+    @StartupScope
+    protected abstract fun initScreen()
+
+    protected abstract fun getLayoutRes(): Int
 
 }

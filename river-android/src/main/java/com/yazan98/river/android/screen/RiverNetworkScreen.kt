@@ -3,6 +3,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.yazan98.river.android.base.BaseScreen
 import com.yazan98.river.base.presenter.RiverRxPresenter
+import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.NetworkView
 
 /**
@@ -21,7 +22,7 @@ import com.yazan98.river.base.view.NetworkView
  *    limitations under the License.
  */
 
-abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View>>: BaseScreen() {
+abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View>>: BaseScreen(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

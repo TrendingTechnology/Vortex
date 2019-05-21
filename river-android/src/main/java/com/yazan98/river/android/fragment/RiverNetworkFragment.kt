@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.yazan98.river.android.base.BaseFragment
 import com.yazan98.river.base.presenter.RiverRxPresenter
+import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.NetworkView
 
 /**
@@ -24,7 +25,8 @@ import com.yazan98.river.base.view.NetworkView
  *    limitations under the License.
  */
 
-abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>> : BaseFragment() {
+abstract class RiverNetworkFragment<View : NetworkView, Presenter : RiverRxPresenter<View>> : BaseFragment() ,
+    BaseView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {
         return super.onCreateView(inflater, container, savedInstanceState)
