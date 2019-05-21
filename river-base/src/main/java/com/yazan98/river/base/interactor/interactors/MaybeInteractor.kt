@@ -30,7 +30,7 @@ import io.reactivex.disposables.Disposable
  * Time : 12:26 AM
  */
 
-abstract class MaybeInteractor<Request, in Params> : RiverInteractor<Maybe<Request>, Params>() {
+abstract class MaybeInteractor<Request, in Params>(thread: Scheduler) : RiverInteractor<Maybe<Request>, Params>() {
 
     lateinit var callback: MaybeSubscriber<Request>
     val provider: RxProvider<Request> = RxProvider()

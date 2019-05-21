@@ -9,6 +9,7 @@ import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import java.util.concurrent.atomic.AtomicBoolean
+import javax.inject.Inject
 
 
 /**
@@ -33,11 +34,11 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Time : 1:08 AM
  */
 
-open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
+open class RiverRxPresenter<View : BaseView> @Inject constructor() : RiverRxPresenterImpl<View> {
 
     private lateinit var view: View
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
-    val reactiveManager: RxManager = RxManager()
+    val manager: RxManager = RxManager()
     private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
 
     override fun getView(): View {
@@ -55,11 +56,11 @@ open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
     }
 
     override fun addRxRequest(request: Disposable) {
-        reactiveManager.addRequest(request)
+        manager.addRequest(request)
     }
 
     override fun destroyRxPresenter() {
-        reactiveManager.clearRequests()
+        manager.clearRequests()
     }
 
     override fun attachView(v: View) {
@@ -82,7 +83,7 @@ open class RiverRxPresenter<View : BaseView> : RiverRxPresenterImpl<View> {
     }
 
     public override fun destroyPresenter() {
-        reactiveManager.clearRequests()
+        manager.clearRequests()
     }
 
 }

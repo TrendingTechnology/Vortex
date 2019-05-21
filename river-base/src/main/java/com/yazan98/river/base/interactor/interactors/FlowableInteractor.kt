@@ -30,7 +30,7 @@ import io.reactivex.disposables.Disposable
  * Time : 12:24 AM
  */
 
-abstract class FlowableInteractor<Request, in Params> : RiverInteractor<Flowable<Request>, Params>() {
+abstract class FlowableInteractor<Request, in Params>(thread: Scheduler) : RiverInteractor<Flowable<Request>, Params>() {
 
     val provider: RxProvider<Request> = RxProvider()
     lateinit var callback: FlowableSubscriber<Request>

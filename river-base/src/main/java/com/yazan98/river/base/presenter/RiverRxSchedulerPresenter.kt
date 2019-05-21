@@ -1,5 +1,8 @@
 package com.yazan98.river.base.presenter
 
+import com.yazan98.river.base.view.BaseView
+import io.reactivex.Scheduler
+
 /**
  *                                  Apache License
  *                            Version 2.0, January 2004
@@ -210,5 +213,8 @@ package com.yazan98.river.base.presenter
  * Time : 7:09 PM
  */
 
-class RiverRxSchedularPresenter {
+abstract class RiverRxSchedulerPresenter<View : BaseView> : RiverRxPresenter<View>() {
+
+    protected abstract fun getCurrentThread(): Scheduler
+
 }
