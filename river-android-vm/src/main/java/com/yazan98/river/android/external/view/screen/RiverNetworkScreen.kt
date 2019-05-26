@@ -1,5 +1,8 @@
 package com.yazan98.river.android.external.view.screen
 
+import android.annotation.SuppressLint
+import android.os.Bundle
+import androidx.annotation.CallSuper
 import com.yazan98.river.android.external.view.base.BaseScreen
 import com.yazan98.river.android.external.vm.RiverNetworkViewModel
 import com.yazan98.river.base.view.NetworkView
@@ -26,6 +29,19 @@ import com.yazan98.river.base.view.NetworkView
  * Time : 10:10 PM
  */
 abstract class RiverNetworkScreen<View: NetworkView , VM : RiverNetworkViewModel<View>> : BaseScreen() , NetworkView {
+
+    @CallSuper
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        handlePresenterStatus()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun handlePresenterStatus() {
+        getViewModel().getPresenterStatus().subscribe {
+            getViewModel().getView().acceptPresenterStatus(it)
+        }
+    }
 
     protected abstract fun getViewModel(): VM
 

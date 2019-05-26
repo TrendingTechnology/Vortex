@@ -209,5 +209,5 @@ include ':android-sample',
         ':river-android-vm',
         ':river-android-data'
 
-include ':river-web',
-        ':river-web-extras'
+//include ':river-web',
+//        ':river-web-extras'

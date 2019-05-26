@@ -1,6 +1,7 @@
 package com.yazan98.river.android.screen
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.annotation.CallSuper
 import com.yazan98.river.android.base.BaseScreen
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.base.view.BaseView
@@ -24,6 +25,7 @@ import com.yazan98.river.base.view.NetworkView
 
 abstract class RiverNetworkScreen<View: NetworkView , Presenter: RiverRxPresenter<View>>: BaseScreen(), BaseView {
 
+    @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         handlePresenterStatus()
