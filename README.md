@@ -14,8 +14,6 @@ Base Code To Build Android Applications With RxJava , Clean Architecture and VIP
 
 # Setup
 
-### 2 Way To Setup Library
-
 1. VIPER Architecture
 2. MVVM Architecture
 
