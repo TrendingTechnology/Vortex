@@ -5,7 +5,7 @@ Base Code To Build Android Applications With RxJava , Clean Architecture and VIP
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)
 ![Status](https://img.shields.io/badge/Project%20Status-Beta%20Version-yellow.svg)
 ![AndroidX](https://img.shields.io/badge/Android%20Status-AndroidX-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.7-green.svg)
+![Version](https://img.shields.io/badge/Version-0.0.9-green.svg)
 
 
 > Build Full Applications With One Library 
@@ -13,6 +13,11 @@ Base Code To Build Android Applications With RxJava , Clean Architecture and VIP
 > Bintray Packages Status : https://bintray.com/yt98/River-Core
 
 # Setup
+
+### 2 Way To Setup Library
+
+1. VIPER Architecture
+2. MVVM Architecture
 
 Add Sonatype's snapshots repository:
 
@@ -27,13 +32,25 @@ Add Sonatype's snapshots repository:
 
 Build.gradle
 
+
 ```
+   
+    // Setup River Core With Viper Architecture
     dependencies {
-        implementation "com.yazan98.river.core:river-base-ktx:0.0.7"
-        implementation "com.yazan98.river.core:river-android-ktx:0.0.7"
-        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.7"
-        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.7"
+        implementation "com.yazan98.river.core:river-base-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.9"
     }
+    
+    // Setup River Core With MVVM Architecture
+    dependencies {
+        implementation "com.yazan98.river.core:river-base-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-vm-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.9"
+        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.9"
+}
+
 ```
 
 # Library Structure
@@ -43,8 +60,9 @@ Build Full Android Application With "River Core" Depends on
 1. VIPER Architecture
 2. RxJava 2
 3. Clean Architecture
+4. MVVM Architecture
 
-VIPER Architecture Components
+#### VIPER Architecture Components
 1. V -> View
 2. I -> Interactor
 3. P -> Presenter
@@ -64,4 +82,5 @@ VIPER Architecture Components
 # Usage
 
 The Following Link have simple example about how to use library
+(Written With Viper Architecture)
 > https://github.com/Yazan98/River-Android-Sample

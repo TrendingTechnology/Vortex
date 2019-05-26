@@ -93,7 +93,7 @@ apply from: "tools/SpringDependencies.gradle"
 
 ext {
     RiverGroup = "com.yazan98.river.core"
-    RiverVersion = "0.0.8"
+    RiverVersion = "0.0.9"
     PackagingType = "arr"
     LibraryName = "River-Core"
     GithubUrl = "https://www.github.com/Yazan98/River-Core"
