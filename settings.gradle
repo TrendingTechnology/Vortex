@@ -206,7 +206,7 @@ include ':android-sample',
         ':river-base',
         ':river-android',
         ':river-android-extras',
-        ':river-android-external',
+        ':river-android-vm',
         ':river-android-data'
 
 include ':river-web',

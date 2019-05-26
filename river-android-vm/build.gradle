@@ -45,11 +45,20 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation RiverAndroidExtras.AndroidMaterialDesign
+    implementation project(":river-base")
+    implementation RiverAndroidDeps.LifecycleExtentions
+    implementation RiverAndroidDeps.ViewModel
+    implementation RiverAndroidDeps.LiveData
 
     implementation RiverAndroidDeps.AppCompat
     testImplementation RiverAndroidDeps.Junit
     androidTestImplementation RiverAndroidDeps.Runner
     androidTestImplementation RiverAndroidDeps.Esspresso
+
+    implementation RiverBase.RxJava
+    implementation RiverAndroidData.RxAndroid
+
+    implementation RiverAndroidDeps.NavigationFragment
+    implementation RiverAndroidDeps.NavigationUI
 
 }

@@ -12,14 +12,15 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/river-android" />
             <option value="$PROJECT_DIR$/river-android-data" />
-            <option value="$PROJECT_DIR$/river-android-external" />
             <option value="$PROJECT_DIR$/river-android-extras" />
+            <option value="$PROJECT_DIR$/river-android-vm" />
             <option value="$PROJECT_DIR$/river-base" />
             <option value="$PROJECT_DIR$/river-web" />
             <option value="$PROJECT_DIR$/river-web-extras" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
