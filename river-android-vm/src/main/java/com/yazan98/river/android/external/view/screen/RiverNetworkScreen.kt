@@ -3,9 +3,11 @@ package com.yazan98.river.android.external.view.screen
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.annotation.CallSuper
+import androidx.lifecycle.Observer
 import com.yazan98.river.android.external.view.base.BaseScreen
 import com.yazan98.river.android.external.vm.RiverNetworkViewModel
 import com.yazan98.river.base.view.NetworkView
+import com.yazan98.river.base.view.RiverVmView
 
 /**
  *    Copyright 2019 Yazan Tarifi
@@ -28,19 +30,18 @@ import com.yazan98.river.base.view.NetworkView
  * Date : 5/26/2019
  * Time : 10:10 PM
  */
-abstract class RiverNetworkScreen<View: NetworkView , VM : RiverNetworkViewModel<View>> : BaseScreen() , NetworkView {
+abstract class RiverNetworkScreen<View: RiverVmView , VM : RiverNetworkViewModel<View>> : BaseScreen() , RiverVmView {
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        handlePresenterStatus()
+        registerViewModelStatus()
     }
 
-    @SuppressLint("CheckResult")
-    private fun handlePresenterStatus() {
-        getViewModel().getPresenterStatus().subscribe {
-            getViewModel().getView().acceptPresenterStatus(it)
-        }
+    private fun registerViewModelStatus() {
+        getViewModel().getViewModelStatus().observe(this , Observer {
+            onStateChanged(it)
+        })
     }
 
     protected abstract fun getViewModel(): VM

@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yazan98.river.android.common.ui.ImageLoaders
 import com.yazan98.river.android.screen.RiverNetworkScreen
-import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.state.State
 import com.yazan98.river.core.R
 import com.yazan98.river.core.domain.GithubUser
 import com.yazan98.river.core.logic.GithubPresenter
@@ -57,13 +57,13 @@ class GithubScreen : RiverNetworkScreen<GithubView, GithubPresenter>(), GithubVi
 
     }
 
-    override fun acceptPresenterStatus(status: PresenterStatus) {
-        if (status == PresenterStatus.LOADING) {
+    override fun acceptPresenterStatus(status: State) {
+        if (status == State.LOADING) {
             imageView.visibility = View.INVISIBLE
             textView.visibility = View.INVISIBLE
             textView2.visibility = View.INVISIBLE
             Progress.visibility = View.VISIBLE
-        } else if (status == PresenterStatus.FINISHED) {
+        } else if (status == State.FINISHED) {
             imageView.visibility = View.VISIBLE
             textView.visibility = View.VISIBLE
             textView2.visibility = View.VISIBLE

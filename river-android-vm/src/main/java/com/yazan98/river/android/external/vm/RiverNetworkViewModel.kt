@@ -1,11 +1,14 @@
 package com.yazan98.river.android.external.vm
 
+import androidx.annotation.CallSuper
+import androidx.lifecycle.MutableLiveData
 import com.yazan98.river.android.external.vm.base.RiverViewModel
 import com.yazan98.river.base.RiverConsts
 import com.yazan98.river.base.error.ViewNotAttatchedError
-import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.state.State
 import com.yazan98.river.base.rx.RxManager
 import com.yazan98.river.base.view.NetworkView
+import com.yazan98.river.base.view.RiverVmView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
@@ -34,12 +37,14 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Time : 9:46 PM
  */
 
-open class RiverNetworkViewModel<View : NetworkView> : RiverViewModel.RiverNetworkViewModelImpl<View>() {
+open class RiverNetworkViewModel<View : RiverVmView> : RiverViewModel.RiverNetworkViewModelImpl<View>() {
 
     private lateinit var view: WeakReference<View>
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
     val manager: RxManager = RxManager()
-    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
+    private val currentStatus: MutableLiveData<State> by lazy {
+        MutableLiveData<State>()
+    }
 
     override fun getView(): View {
         if (::view.isInitialized) {
@@ -59,10 +64,6 @@ open class RiverNetworkViewModel<View : NetworkView> : RiverViewModel.RiverNetwo
         manager.addRequest(request)
     }
 
-    override fun destroyRxPresenter() {
-        manager.clearRequests()
-    }
-
     override fun attachView(v: View) {
         changeViewStatus(true)
         this.view = WeakReference(v)
@@ -72,17 +73,18 @@ open class RiverNetworkViewModel<View : NetworkView> : RiverViewModel.RiverNetwo
         this.viewStatus.set(newStatus)
     }
 
-    override fun changePresenterStatus(newStatus: PresenterStatus) {
-        synchronized(newStatus) {
-            this.presenterStatusSubject.onNext(newStatus)
-        }
-    }
-
-    override fun getPresenterStatus(): Observable<PresenterStatus> {
-        return this.presenterStatusSubject
-    }
-
-    public override fun destroyPresenter() {
+    @CallSuper
+    public override fun destroyViewModel() {
+        view.clear()
         manager.clearRequests()
     }
+
+    public override fun changeState(newState: State) {
+        currentStatus.postValue(newState)
+    }
+
+    override fun getViewModelStatus(): MutableLiveData<State> {
+        return currentStatus
+    }
+
 }

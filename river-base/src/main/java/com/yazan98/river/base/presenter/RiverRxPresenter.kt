@@ -4,6 +4,7 @@ import com.yazan98.river.base.RiverConsts
 import com.yazan98.river.base.error.ViewNotAttatchedError
 import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
 import com.yazan98.river.base.rx.RxManager
+import com.yazan98.river.base.state.State
 import com.yazan98.river.base.view.BaseView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -39,7 +40,7 @@ open class RiverRxPresenter<View : BaseView> @Inject constructor() : RiverRxPres
     private lateinit var view: View
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
     val manager: RxManager = RxManager()
-    private val presenterStatusSubject: BehaviorSubject<PresenterStatus> = BehaviorSubject.create()
+    private val presenterStatusSubject: BehaviorSubject<State> = BehaviorSubject.create()
 
     override fun getView(): View {
         if (::view.isInitialized) {
@@ -72,13 +73,13 @@ open class RiverRxPresenter<View : BaseView> @Inject constructor() : RiverRxPres
         this.viewStatus.set(newStatus)
     }
 
-    override fun changePresenterStatus(newStatus: PresenterStatus) {
+    override fun changePresenterStatus(newStatus: State) {
         synchronized(newStatus) {
             this.presenterStatusSubject.onNext(newStatus)
         }
     }
 
-    override fun getPresenterStatus(): Observable<PresenterStatus> {
+    override fun getPresenterStatus(): Observable<State> {
         return this.presenterStatusSubject
     }
 

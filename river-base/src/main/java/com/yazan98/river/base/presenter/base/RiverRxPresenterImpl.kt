@@ -1,6 +1,6 @@
 package com.yazan98.river.base.presenter.base
 
-import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.state.State
 import com.yazan98.river.base.view.BaseView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -34,9 +34,9 @@ interface RiverRxPresenterImpl<View: BaseView> : RiverPresenterImpl<View> {
 
     fun destroyRxPresenter()
 
-    fun changePresenterStatus(newStatus: PresenterStatus)
+    fun changePresenterStatus(newStatus: State)
 
-    fun getPresenterStatus(): Observable<PresenterStatus>
+    fun getPresenterStatus(): Observable<State>
 
     fun destroyPresenter()
 

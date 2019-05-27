@@ -1,8 +1,13 @@
-package com.yazan98.river.base.presenter
+package com.yazan98.river.android.external.vm.impl
 
+import androidx.annotation.CallSuper
+import androidx.lifecycle.MutableLiveData
+import com.yazan98.river.base.scopes.StartupScope
+import com.yazan98.river.base.state.State
+import com.yazan98.river.base.view.RiverVmView
 
 /**
- *    Copyright [2019] [Yazan Tarifi]
+ *    Copyright 2019 Yazan Tarifi
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,10 +24,21 @@ package com.yazan98.river.base.presenter
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/11/2019
- * Time : 1:02 AM
+ * Date : 5/27/2019
+ * Time : 7:06 PM
  */
+interface RiverVmImplementor<View: RiverVmView> {
 
-enum class PresenterStatus {
-    LOADING, FINISHED, INITIALIZATION, EMPTY_STATE
+    fun getView(): View
+
+    fun getViewStatus(): Boolean
+
+    @StartupScope
+    fun attachView(v: View)
+
+    fun changeViewStatus(newStatus: Boolean)
+
+    fun destroyViewModel()
+
+    fun getViewModelStatus(): MutableLiveData<State>
 }

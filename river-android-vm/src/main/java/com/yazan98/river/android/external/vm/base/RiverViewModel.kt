@@ -1,12 +1,15 @@
 package com.yazan98.river.android.external.vm.base
 
 import androidx.lifecycle.ViewModel
+import com.yazan98.river.android.external.vm.impl.RiverLocalVmImplementor
+import com.yazan98.river.android.external.vm.impl.RiverNetworkVmImplementor
 import com.yazan98.river.base.presenter.base.Presenter
 import com.yazan98.river.base.presenter.base.RiverPresenterImpl
 import com.yazan98.river.base.presenter.base.RiverRxOneWayPresenterImpl
 import com.yazan98.river.base.presenter.base.RiverRxPresenterImpl
 import com.yazan98.river.base.view.LocalView
 import com.yazan98.river.base.view.NetworkView
+import com.yazan98.river.base.view.RiverVmView
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -34,10 +37,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 sealed class RiverViewModel : ViewModel(), Presenter {
 
-    abstract class RiverLocalViewModelImpl<View : LocalView> : RiverViewModel(), RiverPresenterImpl<View>
-    abstract class RiverNetworkViewModelImpl<View : NetworkView> : RiverViewModel(), RiverRxPresenterImpl<View>
-    abstract class RiverOneWayNetworkViewModel<View : NetworkView, Repo> : RiverViewModel(),
-        RiverRxOneWayPresenterImpl<View, Repo>
+    abstract class RiverLocalViewModelImpl<View : RiverVmView> : RiverViewModel(), RiverLocalVmImplementor<View>
+    abstract class RiverNetworkViewModelImpl<View : RiverVmView> : RiverViewModel(), RiverNetworkVmImplementor<View>
 
     protected fun getMainThread(): Scheduler {
         return AndroidSchedulers.mainThread()

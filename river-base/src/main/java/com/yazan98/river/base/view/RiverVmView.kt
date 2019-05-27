@@ -1,10 +1,6 @@
-package com.yazan98.river.android.external.view.screen
+package com.yazan98.river.base.view
 
-import com.yazan98.river.android.external.view.base.BaseScreen
-import com.yazan98.river.android.external.vm.RiverLocalViewModel
-import com.yazan98.river.base.view.BaseView
-import com.yazan98.river.base.view.LocalView
-import com.yazan98.river.base.view.RiverVmView
+import com.yazan98.river.base.state.State
 
 /**
  *    Copyright 2019 Yazan Tarifi
@@ -24,12 +20,13 @@ import com.yazan98.river.base.view.RiverVmView
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/26/2019
- * Time : 10:05 PM
+ * Date : 5/27/2019
+ * Time : 7:04 PM
  */
+interface RiverVmView : BaseView {
 
-abstract class RiverLocalScreen<View: RiverVmView , VM: RiverLocalViewModel<View>> : BaseScreen() , BaseView {
+    fun onError(error: Throwable)
 
-    protected abstract fun getViewModel(): VM
+    fun onStateChanged(newStatus: State)
 
 }

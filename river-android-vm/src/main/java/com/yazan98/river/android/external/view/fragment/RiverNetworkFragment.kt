@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
+import androidx.lifecycle.Observer
 import com.yazan98.river.android.base.BaseFragment
 import com.yazan98.river.android.external.vm.RiverNetworkViewModel
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.base.scopes.StartupScope
 import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.NetworkView
+import com.yazan98.river.base.view.RiverVmView
 
 /**
  *    Copyright 2019 Yazan Tarifi
@@ -33,7 +35,7 @@ import com.yazan98.river.base.view.NetworkView
  * Date : 5/26/2019
  * Time : 10:16 PM
  */
-abstract class RiverNetworkFragment<View : NetworkView, VM : RiverNetworkViewModel<View>> : BaseFragment() ,
+abstract class RiverNetworkFragment<View : RiverVmView, VM : RiverNetworkViewModel<View>> : BaseFragment(), RiverVmView ,
     BaseView {
 
     @CallSuper
@@ -44,16 +46,15 @@ abstract class RiverNetworkFragment<View : NetworkView, VM : RiverNetworkViewMod
     @CallSuper
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        handlePresenterStatus()
+        registerViewModelStatus()
     }
 
-    @StartupScope
-    @SuppressLint("CheckResult")
-    private fun handlePresenterStatus() {
-        getViewModel().getPresenterStatus().subscribe {
-            getViewModel().getView().acceptPresenterStatus(it)
-        }
+    private fun registerViewModelStatus() {
+        getViewModel().getViewModelStatus().observe(this , Observer {
+            onStateChanged(it)
+        })
     }
+
 
     protected abstract fun getViewModel(): VM
 

@@ -1,10 +1,8 @@
-package com.yazan98.river.android.external.view.screen
+package com.yazan98.river.android.external.vm.impl
 
-import com.yazan98.river.android.external.view.base.BaseScreen
-import com.yazan98.river.android.external.vm.RiverLocalViewModel
-import com.yazan98.river.base.view.BaseView
-import com.yazan98.river.base.view.LocalView
+import com.yazan98.river.base.state.State
 import com.yazan98.river.base.view.RiverVmView
+import io.reactivex.disposables.Disposable
 
 /**
  *    Copyright 2019 Yazan Tarifi
@@ -24,12 +22,13 @@ import com.yazan98.river.base.view.RiverVmView
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/26/2019
- * Time : 10:05 PM
+ * Date : 5/27/2019
+ * Time : 7:07 PM
  */
+interface RiverNetworkVmImplementor<View : RiverVmView> : RiverVmImplementor<View> {
 
-abstract class RiverLocalScreen<View: RiverVmView , VM: RiverLocalViewModel<View>> : BaseScreen() , BaseView {
+    fun changeState(newState: State)
 
-    protected abstract fun getViewModel(): VM
+    fun addRxRequest(request: Disposable)
 
 }

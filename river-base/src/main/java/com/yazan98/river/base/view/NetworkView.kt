@@ -1,5 +1,7 @@
 package com.yazan98.river.base.view
 
+import com.yazan98.river.base.state.State
+
 
 /**
  *    Copyright [2019] [Yazan Tarifi]
@@ -23,4 +25,10 @@ package com.yazan98.river.base.view
  * Time : 1:06 AM
  */
 
-interface NetworkView : BaseView
+interface NetworkView : BaseView {
+
+    fun acceptPresenterStatus(status: State)
+
+    fun onError(error: Throwable)
+
+}

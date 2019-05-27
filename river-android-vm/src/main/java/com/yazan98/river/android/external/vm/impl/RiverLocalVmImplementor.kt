@@ -1,9 +1,5 @@
-package com.yazan98.river.android.external.view.screen
+package com.yazan98.river.android.external.vm.impl
 
-import com.yazan98.river.android.external.view.base.BaseScreen
-import com.yazan98.river.android.external.vm.RiverLocalViewModel
-import com.yazan98.river.base.view.BaseView
-import com.yazan98.river.base.view.LocalView
 import com.yazan98.river.base.view.RiverVmView
 
 /**
@@ -24,12 +20,7 @@ import com.yazan98.river.base.view.RiverVmView
 
 /**
  * Created By : Yazan Tarifi
- * Date : 5/26/2019
- * Time : 10:05 PM
+ * Date : 5/27/2019
+ * Time : 7:09 PM
  */
-
-abstract class RiverLocalScreen<View: RiverVmView , VM: RiverLocalViewModel<View>> : BaseScreen() , BaseView {
-
-    protected abstract fun getViewModel(): VM
-
-}
+interface RiverLocalVmImplementor<View : RiverVmView> : RiverVmImplementor<View>

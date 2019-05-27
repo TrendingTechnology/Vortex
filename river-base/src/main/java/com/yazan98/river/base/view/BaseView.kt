@@ -1,7 +1,6 @@
 package com.yazan98.river.base.view
 
-import com.yazan98.river.base.presenter.PresenterStatus
-import com.yazan98.river.base.scopes.StartupScope
+import com.yazan98.river.base.state.State
 
 
 /**
@@ -28,8 +27,6 @@ import com.yazan98.river.base.scopes.StartupScope
 
 interface BaseView {
 
-    fun acceptPresenterStatus(status: PresenterStatus)
 
-    fun onError(error: Throwable)
 
 }

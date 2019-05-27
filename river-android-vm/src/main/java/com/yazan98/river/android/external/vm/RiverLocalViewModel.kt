@@ -1,10 +1,12 @@
 package com.yazan98.river.android.external.vm
 
+import androidx.annotation.CallSuper
 import com.yazan98.river.android.external.vm.base.RiverViewModel
 import com.yazan98.river.base.RiverConsts
 import com.yazan98.river.base.error.ViewNotAttatchedError
 import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.LocalView
+import com.yazan98.river.base.view.RiverVmView
 import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -30,7 +32,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  * Time : 9:46 PM
  */
 
-open class RiverLocalViewModel<View: LocalView> : RiverViewModel.RiverLocalViewModelImpl<View>() {
+open class RiverLocalViewModel<View: RiverVmView> : RiverViewModel.RiverLocalViewModelImpl<View>() {
 
     private lateinit var view: WeakReference<View>
     private val viewStatus: AtomicBoolean = AtomicBoolean(false)
@@ -56,6 +58,11 @@ open class RiverLocalViewModel<View: LocalView> : RiverViewModel.RiverLocalViewM
 
     override fun changeViewStatus(newStatus: Boolean) {
         this.viewStatus.set(newStatus)
+    }
+
+    @CallSuper
+    override fun destroyViewModel() {
+        view.clear()
     }
 
 }

@@ -9,6 +9,7 @@ import com.yazan98.river.android.external.view.base.BaseScreen
 import com.yazan98.river.android.external.vm.RiverLocalViewModel
 import com.yazan98.river.base.view.BaseView
 import com.yazan98.river.base.view.LocalView
+import com.yazan98.river.base.view.RiverVmView
 
 /**
  *    Copyright 2019 Yazan Tarifi
@@ -32,7 +33,7 @@ import com.yazan98.river.base.view.LocalView
  * Time : 10:14 PM
  */
 
-abstract class RiverLocalFragment<View: LocalView, VM: RiverLocalViewModel<View>> : BaseFragment() , BaseView {
+abstract class RiverLocalFragment<View: RiverVmView, VM: RiverLocalViewModel<View>> : BaseFragment() , RiverVmView {
 
     @CallSuper
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): android.view.View? {

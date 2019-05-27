@@ -1,5 +1,7 @@
 package com.yazan98.river.base.view
 
+import com.yazan98.river.base.state.State
+
 
 /**
  *    Copyright [2019] [Yazan Tarifi]
@@ -23,4 +25,8 @@ package com.yazan98.river.base.view
  * Time : 1:04 AM
  */
 
-interface LocalView : BaseView
+interface LocalView : BaseView {
+
+    fun onError(error: Throwable)
+
+}

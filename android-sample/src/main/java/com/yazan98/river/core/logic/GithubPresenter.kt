@@ -2,7 +2,7 @@ package com.yazan98.river.core.logic
 
 import android.util.Log
 import com.yazan98.river.base.interactor.subscribers.ObservableSubscriber
-import com.yazan98.river.base.presenter.PresenterStatus
+import com.yazan98.river.base.state.State
 import com.yazan98.river.base.presenter.RiverRxPresenter
 import com.yazan98.river.core.data.GithubRepo
 import com.yazan98.river.core.domain.GithubUser
@@ -38,7 +38,7 @@ class GithubPresenter : RiverRxPresenter<GithubView>() {
     init {
         interactor.callback = object : ObservableSubscriber<GithubUser>() {
             override fun onComplete() {
-                changePresenterStatus(PresenterStatus.FINISHED)
+                changePresenterStatus(State.FINISHED)
             }
 
             override fun onNext(t: GithubUser) {
@@ -54,7 +54,7 @@ class GithubPresenter : RiverRxPresenter<GithubView>() {
 
     fun getUser() {
         Log.e("Github Screen " , "Get User Presenter")
-        changePresenterStatus(PresenterStatus.LOADING)
+        changePresenterStatus(State.LOADING)
         interactor.executeRequest(repo.getUser())
     }
 }
