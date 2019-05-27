@@ -1,5 +1,6 @@
 package com.yazan98.river.android.external.vm.impl
 
+import androidx.lifecycle.MutableLiveData
 import com.yazan98.river.base.state.State
 import com.yazan98.river.base.view.RiverVmView
 import io.reactivex.disposables.Disposable
@@ -30,5 +31,7 @@ interface RiverNetworkVmImplementor<View : RiverVmView> : RiverVmImplementor<Vie
     fun changeState(newState: State)
 
     fun addRxRequest(request: Disposable)
+
+    fun getViewModelStatus(): MutableLiveData<State>
 
 }

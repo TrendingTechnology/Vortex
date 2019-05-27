@@ -40,5 +40,4 @@ interface RiverVmImplementor<View: RiverVmView> {
 
     fun destroyViewModel()
 
-    fun getViewModelStatus(): MutableLiveData<State>
 }
