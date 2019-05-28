@@ -25,8 +25,4 @@ import com.yazan98.river.base.state.State
  * Time : 1:03 AM
  */
 
-interface BaseView {
-
-
-
-}
+interface BaseView

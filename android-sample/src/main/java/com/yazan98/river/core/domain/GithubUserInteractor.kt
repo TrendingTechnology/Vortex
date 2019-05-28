@@ -22,7 +22,7 @@ import io.reactivex.disposables.Disposable
  *    limitations under the License.
  */
 
-class GithubUserInteractor : ObservableInteractor<GithubUser, Void>() {
+class GithubUserInteractor : ObservableInteractor<GithubUser, Void>(AndroidSchedulers.mainThread()) {
 
     override fun validateParams(params: Void) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
