@@ -9,7 +9,9 @@ Architecture To Build Android Applications With RxJava , Clean Architecture and 
 
 
 > Build Full Applications With One Library 
+
 > Bintray Packages Status : https://bintray.com/yt98/River-Core
+
 
 # Library Structure
 
