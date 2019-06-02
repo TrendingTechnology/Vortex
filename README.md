@@ -1,5 +1,5 @@
 # River-Core
-Base Code To Build Android Applications With RxJava , Clean Architecture and VIPER Architecture
+Architecture To Build Android Applications With RxJava , Clean Architecture and VIPER , MVVM Architecture
  
 ![appveyor](https://img.shields.io/appveyor/ci/Yazan98/River-Core.svg)
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)
@@ -9,8 +9,12 @@ Base Code To Build Android Applications With RxJava , Clean Architecture and VIP
 
 
 > Build Full Applications With One Library 
-
 > Bintray Packages Status : https://bintray.com/yt98/River-Core
+
+# Library Structure
+
+![Untitled Diagram](https://user-images.githubusercontent.com/29167110/58758805-8b602c80-8529-11e9-9710-58b975eef96f.jpg)
+
 
 # Setup
 
@@ -67,15 +71,21 @@ Build Full Android Application With "River Core" Depends on
 4. E -> Entity
 5. R -> Router
 
+
+#### MVVM Architecture Components
+1. V -> View
+2. I -> Interactor
+3. VM -> ViewModel
+4. E -> Entity
+
 # Library Components
-1. Firebase Configuration
-2. LeakCanary Configuration
-3. Android Architecture Components
-4. Utils
-5. Network Calls With Retrofit and RxJava
-6. Local Calls With Room 
-7. UI Utils (Image Loaders / Utils)
-8. Permissions
+- Interactors -> (Observable - Single - Flowable - Maybe)
+- Network With Retrofit and RxJava with Data Layer
+- Local Storage Implementation with SharedPreferences and Room Database
+- Firebase (Firestore - RealtimeDatabase - Messaging - Authentication)
+- Permissions
+- UI Utils
+- UI Helpers -> (RecyclerView Decoration with Ready Adapter - ImageLoaders with Glide / Picasso / Fresco - ImagePicker)
 
 # Usage
 
