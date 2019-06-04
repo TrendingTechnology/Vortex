@@ -1,3 +1,5 @@
+package com.yazan98.river.base.error
+
 import java.lang.Exception
 
 

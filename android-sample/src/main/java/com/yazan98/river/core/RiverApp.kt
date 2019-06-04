@@ -26,7 +26,7 @@ class RiverApp : RiverMultiApplication() {
         super.onCreate()
 
         RiverApplicationConfiguration.LocalBuilder()
-            .enableStrictMode(true)
+            .enableStrictMode(this)
             .withCompatVectorEnabled()
             .withPicassoCachingImages(this)
 

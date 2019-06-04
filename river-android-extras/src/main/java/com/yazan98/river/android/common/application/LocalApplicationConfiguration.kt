@@ -17,25 +17,14 @@ package com.yazan98.river.android.common.application
 
 import android.app.Application
 import android.os.StrictMode
-import android.os.StrictMode.VmPolicy
 import android.os.StrictMode.setThreadPolicy
 import android.os.StrictMode.setVmPolicy
 import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.flipper.android.AndroidFlipperClient
-import com.facebook.flipper.android.utils.FlipperUtils
-import com.facebook.flipper.plugins.crashreporter.CrashReporterPlugin
-import com.facebook.flipper.plugins.inspector.DescriptorMapping
-import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
-import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
-import com.facebook.soloader.SoLoader
-import com.facebook.stetho.DumperPluginsProvider
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.dumpapp.DumperPlugin
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
-import com.uber.rxdogtag.RxDogTag
-import com.uber.rxdogtag.autodispose.AutoDisposeConfigurer
 import com.yazan98.river.android.common.RiverExceptionHandler
 import leakcanary.LeakSentry
 import timber.log.Timber
@@ -118,13 +107,11 @@ class LocalApplicationConfiguration {
     fun withStethoWithDumpApp(application: Application, plugin: DumperPlugin): LocalApplicationConfiguration {
         Stetho.initialize(
             Stetho.newInitializerBuilder(application)
-                .enableDumpapp(object : DumperPluginsProvider {
-                    override fun get(): Iterable<DumperPlugin> {
-                        return Stetho.DefaultDumperPluginsBuilder(application)
-                            .provide(plugin)
-                            .finish()
-                    }
-                })
+                .enableDumpapp {
+                    Stetho.DefaultDumperPluginsBuilder(application)
+                        .provide(plugin)
+                        .finish()
+                }
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(application))
                 .build()
         )
@@ -133,25 +120,6 @@ class LocalApplicationConfiguration {
 
     fun withApplicationExceptionHandler(handler: Thread.UncaughtExceptionHandler): LocalApplicationConfiguration {
         RiverExceptionHandler.getExceptionHandler(handler)
-        return this
-    }
-
-    fun withRxJavaTracingOperations(): LocalApplicationConfiguration {
-        RxDogTag.builder()
-            .configureWith(AutoDisposeConfigurer::configure)
-            .install()
-        return this
-    }
-
-    fun withFlipperConfiguration(app: Application, isDebugModeEnabled: Boolean): LocalApplicationConfiguration {
-        SoLoader.init(app, false)
-        if (isDebugModeEnabled && FlipperUtils.shouldEnableFlipper(app)) {
-            val client = AndroidFlipperClient.getInstance(app)
-            client.addPlugin(InspectorFlipperPlugin(app, DescriptorMapping.withDefaults()))
-            client.addPlugin(CrashReporterPlugin.getInstance())
-            client.addPlugin(NetworkFlipperPlugin())
-            client.start()
-        }
         return this
     }
 

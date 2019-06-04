@@ -5,7 +5,7 @@ Architecture To Build Android Applications With RxJava , Clean Architecture and 
 ![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)
 ![Status](https://img.shields.io/badge/Project%20Status-Beta%20Version-yellow.svg)
 ![AndroidX](https://img.shields.io/badge/Android%20Status-AndroidX-green.svg)
-![Version](https://img.shields.io/badge/Version-0.0.10-green.svg)
+![Version](https://img.shields.io/badge/Version-0.0.11-green.svg)
 
 
 > Build Full Applications With One Library 
@@ -41,19 +41,21 @@ Build.gradle
    
     // Setup River Core With Viper Architecture
     dependencies {
-        implementation "com.yazan98.river.core:river-base-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.10"
+        def riverV = "0.0.11"
+        implementation "com.yazan98.river.core:river-base-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-data-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-extras-ktx:${riverV}"
     }
     
     // Setup River Core With MVVM Architecture
     dependencies {
-        implementation "com.yazan98.river.core:river-base-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-vm-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-data-ktx:0.0.10"
-        implementation "com.yazan98.river.core:river-android-extras-ktx:0.0.10"
-}
+        def riverV = "0.0.11"
+        implementation "com.yazan98.river.core:river-base-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-vm-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-data-ktx:${riverV}"
+        implementation "com.yazan98.river.core:river-android-extras-ktx:${riverV}"
+    }
 
 ```
 
