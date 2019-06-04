@@ -22,6 +22,13 @@ import android.os.StrictMode.setThreadPolicy
 import android.os.StrictMode.setVmPolicy
 import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.android.utils.FlipperUtils
+import com.facebook.flipper.plugins.crashreporter.CrashReporterPlugin
+import com.facebook.flipper.plugins.inspector.DescriptorMapping
+import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.soloader.SoLoader
 import com.facebook.stetho.DumperPluginsProvider
 import com.facebook.stetho.Stetho
 import com.facebook.stetho.dumpapp.DumperPlugin
@@ -40,6 +47,10 @@ import timber.log.Timber
  * Time : 17:25
  */
 
+/**
+ * Local Configuration For Application Class in Android Applications
+ * This CLass Have Common Libraries for initialize the project
+ */
 class LocalApplicationConfiguration {
 
     fun withLeakCanaryWithLeakSentry(): LocalApplicationConfiguration {
@@ -129,6 +140,18 @@ class LocalApplicationConfiguration {
         RxDogTag.builder()
             .configureWith(AutoDisposeConfigurer::configure)
             .install()
+        return this
+    }
+
+    fun withFlipperConfiguration(app: Application, isDebugModeEnabled: Boolean): LocalApplicationConfiguration {
+        SoLoader.init(app, false)
+        if (isDebugModeEnabled && FlipperUtils.shouldEnableFlipper(app)) {
+            val client = AndroidFlipperClient.getInstance(app)
+            client.addPlugin(InspectorFlipperPlugin(app, DescriptorMapping.withDefaults()))
+            client.addPlugin(CrashReporterPlugin.getInstance())
+            client.addPlugin(NetworkFlipperPlugin())
+            client.start()
+        }
         return this
     }
 
