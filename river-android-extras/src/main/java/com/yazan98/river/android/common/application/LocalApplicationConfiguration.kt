@@ -1,4 +1,3 @@
-
 /**
  *    Copyright [2019] [Yazan Tarifi]
  *
@@ -28,6 +27,9 @@ import com.facebook.stetho.Stetho
 import com.facebook.stetho.dumpapp.DumperPlugin
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
+import com.uber.rxdogtag.RxDogTag
+import com.uber.rxdogtag.autodispose.AutoDisposeConfigurer
+import com.yazan98.river.android.common.RiverExceptionHandler
 import leakcanary.LeakSentry
 import timber.log.Timber
 
@@ -40,24 +42,13 @@ import timber.log.Timber
 
 class LocalApplicationConfiguration {
 
-    /**
-     * This process is dedicated to Perflib for heap analysis.
-     * You should not init your app in this process.
-     */
-//    fun withLeakCanaryConfiguration(isEnabled: Boolean, application: Application): LocalApplicationConfiguration {
-//        if (isEnabled) {
-//            LeakCanary.install(application)
-//        }
-//        return this
-//    }
-
     fun withLeakCanaryWithLeakSentry(): LocalApplicationConfiguration {
         LeakSentry.config = LeakSentry.config.copy(watchFragmentViews = false)
         return this
     }
 
-    fun enableStrictMode(isEnabled: Boolean): LocalApplicationConfiguration {
-        if (isEnabled) {
+    fun enableStrictMode(app: Application): LocalApplicationConfiguration {
+        synchronized(app) {
             setThreadPolicy(
                 StrictMode.ThreadPolicy.Builder()
                     .detectDiskReads()
@@ -76,7 +67,6 @@ class LocalApplicationConfiguration {
                     .build()
             )
         }
-
         return this
     }
 
@@ -127,6 +117,18 @@ class LocalApplicationConfiguration {
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(application))
                 .build()
         )
+        return this
+    }
+
+    fun withApplicationExceptionHandler(handler: Thread.UncaughtExceptionHandler): LocalApplicationConfiguration {
+        RiverExceptionHandler.getExceptionHandler(handler)
+        return this
+    }
+
+    fun withRxJavaTracingOperations(): LocalApplicationConfiguration {
+        RxDogTag.builder()
+            .configureWith(AutoDisposeConfigurer::configure)
+            .install()
         return this
     }
 

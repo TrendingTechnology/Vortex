@@ -76,6 +76,10 @@ dependencies {
     implementation RiverAndroidExtras.RecyclerView
     implementation RiverAndroidExtras.AndroidMaterialDesign
 
+    implementation RiverAndroidData.RxAndroid
+    implementation("com.uber.rxdogtag:rxdogtag:0.2.0")
+    implementation("com.uber.rxdogtag:rxdogtag-autodispose:0.2.0")
+
 }
 
 group = rootProject.ext.RiverGroup
