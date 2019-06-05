@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/river-android-extras" />
             <option value="$PROJECT_DIR$/river-android-vm" />
             <option value="$PROJECT_DIR$/river-base" />
+            <option value="$PROJECT_DIR$/river-validator" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
