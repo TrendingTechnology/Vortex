@@ -1,4 +1,3 @@
-
 /**
  *    Copyright [2019] [Yazan Tarifi]
  *
@@ -89,13 +88,13 @@ object RetrofitProvider {
     fun createRetrofitWithFullConfiguration(baseUrl: String, token: String, language: String): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(getZedraClient(token, language))
+            .client(getRiverClient(token, language))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    private fun getZedraClient(token: String, language: String): OkHttpClient {
+    private fun getRiverClient(token: String, language: String): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return OkHttpClient.Builder()
@@ -108,6 +107,15 @@ object RetrofitProvider {
                     .build()
                 chain.proceed(request)
             }
+            .build()
+    }
+
+    fun createRetrofitWithCustomClient(baseUrl: String, client: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
