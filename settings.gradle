@@ -202,12 +202,11 @@
  *    limitations under the License.
  */
 
-include ':android-sample', ':river-validator',
-        ':river-base',
-        ':river-android',
-        ':river-android-extras',
-        ':river-android-vm',
-        ':river-android-data'
-
-//include ':river-web',
-//        ':river-web-extras'
+include ':vortex-sample',
+        ':vortex-validator',
+        ':vortex-ready-ui',
+        ':vortex',
+        ':vortex-vp',
+        ':vortex-extras',
+        ':vortex-vm',
+        ':vortex-data'

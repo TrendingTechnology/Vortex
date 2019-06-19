@@ -1,0 +1,31 @@
+apply plugin: Plugins.AndroidLibraryPlugin
+apply plugin: Plugins.AndroidKotlinPlugin
+apply plugin: Plugins.AndroidKotlinExtentions
+apply plugin: Plugins.AndroidMavenPlugin
+apply plugin: Plugins.Bintray
+
+android {
+    compileSdkVersion VortexDetails.CompileSdkV
+
+
+    defaultConfig {
+        minSdkVersion VortexDetails.MinSdkV
+        targetSdkVersion VortexDetails.CompileSdkV
+        versionCode VortexDetails.VersionCode
+        versionName VortexDetails.VersionName
+        testInstrumentationRunner VortexDetails.TestRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+   
+}
