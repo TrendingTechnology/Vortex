@@ -1,4 +1,4 @@
-package com.yazan98.vortex.android.common;
+package com.yazan98.vortex.android.extras;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

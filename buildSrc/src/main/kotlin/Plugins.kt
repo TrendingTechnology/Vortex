@@ -29,6 +29,7 @@ object Plugins {
     const val JavaPlugin = "java"
     const val AndroidAppPlugin = "com.android.application"
     const val IdeaPlugin = "idea"
+    const val kotlinPlugin = "kotlin"
     const val AndroidKotlinPlugin = "kotlin-android"
     const val AndroidKotlinExtentions = "kotlin-android-extensions"
     const val SpringBootPlugin = "org.springframework.boot"

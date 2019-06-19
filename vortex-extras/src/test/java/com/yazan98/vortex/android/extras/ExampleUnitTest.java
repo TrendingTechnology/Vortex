@@ -1,4 +1,4 @@
-package com.yazan98.vortex.android.common;
+package com.yazan98.vortex.android.extras;
 
 import org.junit.Test;
 

@@ -23,9 +23,7 @@
 object Vortex {
 
     const val RxJava = "io.reactivex.rxjava2:rxjava:2.2.8"
-    const val Dagger = "com.google.dagger:dagger:2.22"
-    const val DaggerCompiler = "com.google.dagger:dagger-compiler:2.22"
-
+    const val RxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
     const val JavaV = "1.8"
 
 }
