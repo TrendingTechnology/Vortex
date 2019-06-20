@@ -38,6 +38,7 @@ buildscript {
         classpath RootLibs.Bintray
         classpath RootLibs.SpringBootPluginV2
         classpath RootLibs.AndroidMaven
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 
 

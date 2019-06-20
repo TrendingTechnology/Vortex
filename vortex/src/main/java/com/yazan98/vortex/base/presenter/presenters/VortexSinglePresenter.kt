@@ -1,7 +1,9 @@
 package com.yazan98.vortex.base.presenter.presenters
 
 import com.yazan98.vortex.base.presenter.Presenter
+import com.yazan98.vortex.base.state.State
 import com.yazan98.vortex.base.view.VortexRxView
+import io.reactivex.Observable
 
 /**
  * Copyright (C) 2019 Yazan Tarifi
@@ -12,4 +14,5 @@ import com.yazan98.vortex.base.view.VortexRxView
  * Time : 3:51 PM
  */
 
-abstract class VortexSinglePresenter<V : VortexRxView, R> : VortexRxPresenter<V>(), Presenter.SinglePresenter<V, R>
+abstract class VortexSinglePresenter<V : VortexRxView, R> :
+    VortexRxPresenter<V>(), Presenter.SinglePresenter<V, R , Observable<State>>

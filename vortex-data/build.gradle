@@ -28,5 +28,12 @@ android {
 dependencies {
     configuration ->
         implementation fileTree(dir: 'libs', include: ['*.jar'])
-        
+        implementation project(":vortex")
+        defaultConfiguration(configuration)
+}
+
+private void defaultConfiguration(config) {
+    config.implementation VortexLibs.KotlinJdk
+    config.implementation Vortex.RxJava
+    config.implementation Vortex.RxAndroid
 }

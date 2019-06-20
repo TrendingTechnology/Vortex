@@ -24,23 +24,23 @@ interface Presenter<V : VortexView> {
 
     fun destroyPresenter()
 
-    interface NetworkPresenter<V : VortexView> : Presenter<V> {
+    interface NetworkPresenter<V : VortexView , T> : Presenter<V> {
 
         fun addRxRequest(request: Disposable)
 
-        fun getStateHandler(): Observable<State>
+        fun getStateHandler(): T
 
         fun acceptNewState(newState: State)
 
     }
 
-    interface SinglePresenter<V : VortexView, R> : NetworkPresenter<V> {
+    interface SinglePresenter<V : VortexView, R , T> : NetworkPresenter<V , T> {
 
         fun getRepository(): R
 
     }
 
-    interface HandlerPresenter<V : VortexView> : NetworkPresenter<V> {
+    interface HandlerPresenter<V : VortexView , T> : NetworkPresenter<V , T> {
 
         fun handleResult(content: VortexResult)
 

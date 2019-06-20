@@ -19,7 +19,7 @@ import io.reactivex.subjects.BehaviorSubject
  * Time : 3:47 PM
  */
 
-open class VortexRxPresenter<V : VortexRxView> : VortexPresenter.NetworkPresenter<V>() {
+open class VortexRxPresenter<V : VortexRxView> : VortexPresenter.NetworkPresenter<V , Observable<State>>() {
 
     private var view: V? = null
     private val repo: RxRequestRepository by lazy { RxRequestRepository() }
@@ -60,4 +60,6 @@ open class VortexRxPresenter<V : VortexRxView> : VortexPresenter.NetworkPresente
             this.presenterStatue.onNext(newState)
         }
     }
+
 }
+

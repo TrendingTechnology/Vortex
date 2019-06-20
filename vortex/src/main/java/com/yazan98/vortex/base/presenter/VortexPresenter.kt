@@ -19,8 +19,8 @@ abstract class VortexPresenter<V : VortexView> : Presenter<V> {
     }
 
     abstract class LocalPresenter<V : VortexView> : VortexPresenter<V>()
-    abstract class NetworkPresenter<V : VortexView> : VortexPresenter<V>(), Presenter.NetworkPresenter<V>
+    abstract class NetworkPresenter<V : VortexView , T> : VortexPresenter<V>(), Presenter.NetworkPresenter<V , T>
 
     //TODO : Implement this type of presenter
-    abstract class HandlerPresenter<V : VortexView> : VortexPresenter<V>() , Presenter.HandlerPresenter<V>
+    abstract class HandlerPresenter<V : VortexView , T> : VortexPresenter<V>() , Presenter.HandlerPresenter<V , T>
 }
