@@ -1,10 +1,14 @@
 package com.yazan98.vortex.base.presenter.presenters
 
+import com.yazan98.vortex.base.VortexConsts
+import com.yazan98.vortex.base.error.VortexViewException
 import com.yazan98.vortex.base.presenter.VortexPresenter
+import com.yazan98.vortex.base.rx.RxRequestRepository
 import com.yazan98.vortex.base.state.State
 import com.yazan98.vortex.base.view.VortexRxView
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.BehaviorSubject
 
 /**
  * Copyright (C) 2019 Yazan Tarifi
@@ -14,33 +18,46 @@ import io.reactivex.disposables.Disposable
  * Date : 6/19/2019
  * Time : 3:47 PM
  */
+
 open class VortexRxPresenter<V : VortexRxView> : VortexPresenter.NetworkPresenter<V>() {
 
+    private var view: V? = null
+    private val repo: RxRequestRepository by lazy { RxRequestRepository() }
+    private val presenterStatue: BehaviorSubject<State> by lazy {
+        BehaviorSubject.create<State>()
+    }
+
     override fun attachView(view: V) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.view = view
     }
 
     override fun getView(): V {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (view != null)
+            return this.view!!
+        else
+            throw VortexViewException(VortexConsts.EMPTY_VIEW)
     }
 
     override fun detatchView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.view = null
     }
 
     override fun destroyPresenter() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.repo.clearAllRequests()
+        this.detatchView()
     }
 
     override fun addRxRequest(request: Disposable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.repo.addRequest(request)
     }
 
     override fun getStateHandler(): Observable<State> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return this.presenterStatue
     }
 
     override fun acceptNewState(newState: State) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        synchronized(newState) {
+            this.presenterStatue.onNext(newState)
+        }
     }
 }

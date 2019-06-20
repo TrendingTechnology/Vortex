@@ -1,6 +1,6 @@
 package com.yazan98.vortex.base.presenter.presenters
 
-import com.yazan98.vortex.base.presenter.VortexPresenter
+import com.yazan98.vortex.base.presenter.Presenter
 import com.yazan98.vortex.base.view.VortexRxView
 
 /**
@@ -11,4 +11,5 @@ import com.yazan98.vortex.base.view.VortexRxView
  * Date : 6/19/2019
  * Time : 3:51 PM
  */
-abstract class VortexSinglePresenter<V : VortexRxView , R> : VortexPresenter.SinglePresenter<V , R>()
+
+abstract class VortexSinglePresenter<V : VortexRxView, R> : VortexRxPresenter<V>(), Presenter.SinglePresenter<V, R>

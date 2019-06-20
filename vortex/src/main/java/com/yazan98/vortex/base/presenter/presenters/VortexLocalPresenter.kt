@@ -1,5 +1,7 @@
 package com.yazan98.vortex.base.presenter.presenters
 
+import com.yazan98.vortex.base.VortexConsts
+import com.yazan98.vortex.base.error.VortexViewException
 import com.yazan98.vortex.base.presenter.VortexPresenter
 import com.yazan98.vortex.base.view.VortexView
 
@@ -11,22 +13,28 @@ import com.yazan98.vortex.base.view.VortexView
  * Date : 6/19/2019
  * Time : 3:47 PM
  */
+
 open class VortexLocalPresenter<V : VortexView> : VortexPresenter.LocalPresenter<V>() {
 
+    private var view: V? = null
+
     override fun attachView(view: V) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.view = view
     }
 
     override fun getView(): V {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (view != null)
+            return this.view!!
+        else
+            throw VortexViewException(VortexConsts.EMPTY_VIEW)
     }
 
     override fun detatchView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.view = null
     }
 
     override fun destroyPresenter() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.detatchView()
     }
 
 }

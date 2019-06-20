@@ -1,6 +1,7 @@
 package com.yazan98.vortex.base.interactor.interactors
 
 import com.yazan98.vortex.base.interactor.VortexInteractor
+import com.yazan98.vortex.base.interactor.subscribers.VortexMaybeSubscriber
 import io.reactivex.Maybe
 
 /**
@@ -11,4 +12,5 @@ import io.reactivex.Maybe
  * Date : 6/19/2019
  * Time : 2:57 PM
  */
-abstract class VortexMaybeInteractor<R, P> : VortexInteractor.ReactiveInteractor<Maybe<R>, P>()
+abstract class VortexMaybeInteractor<R, P> :
+    VortexInteractor.ReactiveInteractor<Maybe<R>, P, VortexMaybeSubscriber<R>>()

@@ -1,5 +1,6 @@
 package com.yazan98.vortex.base.presenter
 
+import com.yazan98.vortex.base.VortexResult
 import com.yazan98.vortex.base.state.State
 import com.yazan98.vortex.base.view.VortexView
 import io.reactivex.Observable
@@ -33,9 +34,15 @@ interface Presenter<V : VortexView> {
 
     }
 
-    interface SinglePresenter<V : VortexView , R> : NetworkPresenter<V> {
+    interface SinglePresenter<V : VortexView, R> : NetworkPresenter<V> {
 
         fun getRepository(): R
+
+    }
+
+    interface HandlerPresenter<V : VortexView> : NetworkPresenter<V> {
+
+        fun handleResult(content: VortexResult)
 
     }
 

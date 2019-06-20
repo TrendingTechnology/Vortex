@@ -1,6 +1,7 @@
 package com.yazan98.vortex.base.interactor.interactors
 
 import com.yazan98.vortex.base.interactor.VortexInteractor
+import com.yazan98.vortex.base.interactor.subscribers.VortexSingleSubscriber
 import io.reactivex.Single
 
 /**
@@ -11,4 +12,5 @@ import io.reactivex.Single
  * Date : 6/19/2019
  * Time : 2:56 PM
  */
-abstract class VortexSingleInteractor<R, P> : VortexInteractor.ReactiveInteractor<Single<R>, P>()
+abstract class VortexSingleInteractor<R, P> :
+    VortexInteractor.ReactiveInteractor<Single<R>, P, VortexSingleSubscriber<R>>()

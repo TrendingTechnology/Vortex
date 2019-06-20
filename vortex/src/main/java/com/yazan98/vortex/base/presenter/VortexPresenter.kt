@@ -1,6 +1,6 @@
 package com.yazan98.vortex.base.presenter
 
-import com.yazan98.vortex.base.rx.VortexThreadProvider
+import com.yazan98.vortex.base.platform.BaseVortex
 import com.yazan98.vortex.base.view.VortexView
 
 /**
@@ -13,10 +13,14 @@ import com.yazan98.vortex.base.view.VortexView
  */
 
 abstract class VortexPresenter<V : VortexView> : Presenter<V> {
-    abstract class LocalPresenter<V : VortexView> : VortexPresenter<V>()
-    abstract class NetworkPresenter<V : VortexView> : VortexPresenter<V>() , Presenter.NetworkPresenter<V>
-    abstract class SinglePresenter<V : VortexView , R> : NetworkPresenter<V>() , Presenter.SinglePresenter<V , R>
-    abstract class SchedularPresenter<V : VortexView> : NetworkPresenter<V>() {
-        protected abstract fun getCurrentThread(): VortexThreadProvider
+
+    init {
+        BaseVortex().initPlatform()
     }
+
+    abstract class LocalPresenter<V : VortexView> : VortexPresenter<V>()
+    abstract class NetworkPresenter<V : VortexView> : VortexPresenter<V>(), Presenter.NetworkPresenter<V>
+
+    //TODO : Implement this type of presenter
+    abstract class HandlerPresenter<V : VortexView> : VortexPresenter<V>() , Presenter.HandlerPresenter<V>
 }

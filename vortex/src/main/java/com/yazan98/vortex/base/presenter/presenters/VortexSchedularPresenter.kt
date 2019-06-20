@@ -1,6 +1,7 @@
 package com.yazan98.vortex.base.presenter.presenters
 
 import com.yazan98.vortex.base.presenter.VortexPresenter
+import com.yazan98.vortex.base.rx.VortexThreadProvider
 import com.yazan98.vortex.base.view.VortexRxView
 
 /**
@@ -11,4 +12,8 @@ import com.yazan98.vortex.base.view.VortexRxView
  * Date : 6/19/2019
  * Time : 3:49 PM
  */
-abstract class VortexSchedularPresenter<V : VortexRxView> : VortexPresenter.SchedularPresenter<V>()
+abstract class VortexSchedularPresenter<V : VortexRxView> : VortexRxPresenter<V>() {
+
+    protected abstract fun getThreadProvider(): VortexThreadProvider
+
+}

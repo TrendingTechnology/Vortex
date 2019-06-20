@@ -1,6 +1,7 @@
 package com.yazan98.vortex.base.interactor.interactors
 
 import com.yazan98.vortex.base.interactor.VortexInteractor
+import com.yazan98.vortex.base.interactor.subscribers.VortexFlowableSubscriber
 import io.reactivex.Flowable
 
 /**
@@ -11,4 +12,6 @@ import io.reactivex.Flowable
  * Date : 6/19/2019
  * Time : 2:56 PM
  */
-abstract class VortexFlowableInteractor<R, P> : VortexInteractor.ReactiveInteractor<Flowable<R>, P>()
+
+abstract class VortexFlowableInteractor<R, P> :
+    VortexInteractor.ReactiveInteractor<Flowable<R>, P, VortexFlowableSubscriber<R>>()
