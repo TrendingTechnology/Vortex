@@ -44,4 +44,12 @@ object VortexLibs {
     const val RecyclerView = "androidx.recyclerview:recyclerview:1.0.0"
     const val AndroidMaterialDesign = "com.google.android.material:material:1.0.0-rc01"
 
+    const val Retrofit = "com.squareup.retrofit2:retrofit:2.5.0"
+    const val RetrofitLogging = "com.squareup.okhttp3:logging-interceptor:3.12.1"
+    const val RetrofitGsonConverter = "com.squareup.retrofit2:converter-gson:2.5.0"
+    const val RetrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+
+    const val LifeCycleExtentions: String = "androidx.lifecycle:lifecycle-extensions:2.0.0"
+    const val RxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+
 }

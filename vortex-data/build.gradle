@@ -30,10 +30,18 @@ dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation project(":vortex")
         defaultConfiguration(configuration)
+        dataConfiguration(configuration)
 }
 
 private void defaultConfiguration(config) {
     config.implementation VortexLibs.KotlinJdk
     config.implementation Vortex.RxJava
     config.implementation Vortex.RxAndroid
+}
+
+private void dataConfiguration(configuration) {
+    configuration.implementation VortexLibs.Retrofit
+    configuration.implementation VortexLibs.RetrofitLogging
+    configuration.implementation VortexLibs.RetrofitGsonConverter
+    configuration.implementation VortexLibs.RetrofitRxJavaAdapter
 }
