@@ -28,7 +28,7 @@ android {
 dependencies {
     configuration ->
         implementation fileTree(dir: 'libs', include: ['*.jar'])
-        implementation project(":vortex-vm-base")
+        implementation project(':vortex-vm-core')
         implementation project(":vortex-data")
         implementation project(":vortex")
         defaultConfiguration(configuration)

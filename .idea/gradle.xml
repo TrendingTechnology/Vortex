@@ -16,7 +16,7 @@
             <option value="$PROJECT_DIR$/vortex-sample" />
             <option value="$PROJECT_DIR$/vortex-validator" />
             <option value="$PROJECT_DIR$/vortex-vm" />
-            <option value="$PROJECT_DIR$/vortex-vm-base" />
+            <option value="$PROJECT_DIR$/vortex-vm-core" />
             <option value="$PROJECT_DIR$/vortex-vp" />
           </set>
         </option>
