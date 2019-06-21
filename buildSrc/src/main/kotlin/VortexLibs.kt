@@ -29,6 +29,7 @@ object VortexLibs {
     const val FirebaseStorage = "com.google.firebase:firebase-storage:18.0.0"
     const val FirebaseCrash = "com.crashlytics.sdk.android:crashlytics:2.10.1"
     const val FirebaseDatabase = "com.google.firebase:firebase-database:18.0.0"
+    const val FirebaseAuthUI = "com.firebaseui:firebase-ui-auth:5.0.0"
 
     const val RxPrefs = "com.f2prateek.rx.preferences2:rx-preferences:2.0.0"
 

@@ -22,7 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -62,6 +61,7 @@ private void firebaseConfiguration(config) {
     config.implementation VortexLibs.FirebaseStorage
     config.implementation VortexLibs.FirebaseCrash
     config.implementation VortexLibs.FirebaseDatabase
+    config.implementation VortexLibs.FirebaseAuthUI
 }
 
 private void uiConfiguration(configuration) {
