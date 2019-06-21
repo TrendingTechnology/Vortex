@@ -1,6 +1,7 @@
 package com.yazan98.vortex.android.fragment
 
 import com.yazan98.vortex.android.base.VortexBaseFragment
+import com.yazan98.vortex.android.extras.ui.ViewPagerAdapter
 
 
 /**
@@ -11,6 +12,11 @@ import com.yazan98.vortex.android.base.VortexBaseFragment
  * Date : 6/20/2019
  * Time : 5:29 PM
  */
+
 abstract class VortexPagerFragment : VortexBaseFragment() {
+
+    protected val pager: ViewPagerAdapter by lazy {
+        ViewPagerAdapter(activity!!.supportFragmentManager)
+    }
 
 }

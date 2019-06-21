@@ -33,6 +33,7 @@ dependencies {
         implementation project(":vortex")
         defaultConfiguration(configuration)
         viewModelConfiguration(configuration)
+        compile project(path: ':vortex-extras')
 }
 
 private void defaultConfiguration(config) {
