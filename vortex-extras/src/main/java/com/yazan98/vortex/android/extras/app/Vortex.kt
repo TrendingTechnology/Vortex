@@ -16,11 +16,14 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
-import com.yazan98.vortex.android.extras.keys.VortexArchitecture
+import com.yazan98.vortex.android.extras.VortexViewModelPlatform
+import com.yazan98.vortex.android.extras.VortexViperPlatform
 import com.yazan98.vortex.android.extras.keys.ImageLoaders
+import com.yazan98.vortex.android.extras.keys.VortexArchitecture
 import com.yazan98.vortex.android.extras.keys.VortexLogger
 import com.yazan98.vortex.base.VortexConsts
 import com.yazan98.vortex.base.error.VortexBlockedException
+import com.yazan98.vortex.base.platform.BaseVortex
 import io.fabric.sdk.android.Fabric
 import leakcanary.LeakSentry
 import timber.log.Timber
@@ -166,15 +169,15 @@ object Vortex : IVortex {
     override fun build(): Vortex {
         if (::architecture.isInitialized) {
             when (architecture) {
-                //TODO: Implement this when make Validation
                 VortexArchitecture.VIEW_MODEL -> {
-
+                    BaseVortex().initPlatform()
+                    VortexViewModelPlatform()
                 }
 
                 VortexArchitecture.VIPER -> {
-
+                    BaseVortex().initPlatform()
+                    VortexViperPlatform()
                 }
-
             }
         } else {
             throw VortexBlockedException(

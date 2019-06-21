@@ -9,7 +9,7 @@ package com.yazan98.vortex.base.platform
  * Time : 2:49 PM
  */
 
-class BaseVortex {
+open class BaseVortex {
 
     fun initPlatform() {
         PlatformValidator.checkFlowableDependency()

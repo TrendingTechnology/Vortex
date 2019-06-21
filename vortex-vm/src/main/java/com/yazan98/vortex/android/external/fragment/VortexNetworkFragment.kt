@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.lifecycle.Observer
 import com.yazan98.vortex.android.external.base.VortexBaseFragment
-import com.yazan98.vortex.android.external.base.VortexBaseScreen
 import com.yazan98.vortex.base.view.VortexRxView
 import com.yazan98.vortex.vm.base.VortexNetworkViewModel
 

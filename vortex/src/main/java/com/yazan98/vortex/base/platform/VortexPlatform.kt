@@ -20,7 +20,7 @@ object VortexPlatform {
     val DEPENDENCY_REPOSITORY =
         findClassByClassName("io.reactivex.disposables.CompositeDisposable")
 
-    open fun findClassByClassName(className: String): Boolean {
+    fun findClassByClassName(className: String): Boolean {
         return try {
             Class.forName(className)
             true
