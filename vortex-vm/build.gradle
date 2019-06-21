@@ -50,3 +50,98 @@ private void viewModelConfiguration(config) {
     config.implementation VortexLibs.LiveDataCore
     config.implementation VortexLibs.LifecycleExtentions
 }
+
+
+group = rootProject.ext.Group
+version = rootProject.ext.Version
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging rootProject.ext.PackagingType
+            name rootProject.ext.LibraryName
+            description rootProject.ext.VortexVmDescription
+            url rootProject.ext.GithubUrl
+
+            artifactId "${rootProject.ext.VortexVm}"
+            groupId rootProject.ext.Group
+            version rootProject.ext.Version
+
+            licenses {
+
+                license {
+                    name rootProject.ext.licenseName
+                    url rootProject.ext.licenseUrl
+                    distribution rootProject.ext.distribution
+                }
+            }
+
+            scm {
+                connection rootProject.ext.GitUrl
+                url rootProject.ext.GithubUrl
+            }
+
+            developers {
+
+                developer {
+                    id rootProject.ext.DeveloperID
+                    name rootProject.ext.DeveloperName
+                    email rootProject.ext.DeveloperEmail
+                }
+
+            }
+
+        }
+    }
+}
+
+bintray {
+
+    user = "${rootProject.ext.bintrayUsername}"
+    key = "${rootProject.ext.bintrayApiKey}"
+
+    configurations = ['archives']
+    publications = ['Production']
+
+    publish = true
+
+    pkg {
+        repo = rootProject.ext.LibraryName
+        name = "${rootProject.ext.VortexVm}"
+        desc = "${rootProject.ext.VortexVmDescription}"
+
+        dryRun = false
+        publish = true
+        override = true
+
+        userOrg = user
+        licenses = ["${rootProject.ext.licenseName}"]
+        vcsUrl = rootProject.ext.GitUrl
+        issueTrackerUrl = rootProject.ext.GithubIssuesUrl
+
+        publicDownloadNumbers = true
+
+    }
+}
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexVm}-release.aar")
+            groupId rootProject.ext.Group
+            artifactId "${rootProject.ext.VortexVm}"
+            version rootProject.ext.Version
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}

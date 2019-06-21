@@ -88,8 +88,8 @@ apply from: "tools/SpringDependencies.gradle"
  */
 
 ext {
-    RiverGroup = "com.yazan98.vortex"
-    RiverVersion = "0.0.1"
+    Group = "com.yazan98.vortex"
+    Version = "0.0.1"
     PackagingType = "arr"
     LibraryName = "Vortex"
     GithubUrl = "https://www.github.com/Yazan98/Vortex"
@@ -105,4 +105,22 @@ ext {
 
     bintrayUsername = "yt98"
     bintrayApiKey = ""
+
+    VortexCore = "vortex-core-ktx"
+    VortexCoreDescription = "Base Code To Build Vortex Applications Based On RxJava 2"
+
+    VortexD = "vortex-data-ktx"
+    VortexDDescription = "Vortex Android Data Layer To Handle Network Requests"
+
+    VortexExtras = "vortex-extras-ktx"
+    VortexExtrasDescription = "Vortex Android UI Layer With Many Operations"
+
+    VortexVm = "vortex-viewmodel-ktx"
+    VortexVmDescription = "Vortex Android UI Layer For ViewModel Implementation"
+
+    VortexVmCore = "vortex-viewmodel-core-ktx"
+    VortexVmCoreDescription = "Vortex Android UI Layer For ViewModel Core Configuration"
+
+    VortexViper = "vortex-viper-ktx"
+    VortexViperDescription = "Vortex Android UI Layer For ViewModel Implementation"
 }
