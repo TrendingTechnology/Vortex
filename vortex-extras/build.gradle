@@ -5,8 +5,8 @@ apply plugin: Plugins.AndroidMavenPlugin
 apply plugin: Plugins.Bintray
 
 android {
-    compileSdkVersion VortexDetails.CompileSdkV
 
+    compileSdkVersion VortexDetails.CompileSdkV
 
     defaultConfig {
         minSdkVersion VortexDetails.MinSdkV
@@ -26,6 +26,45 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-   
+    configuration ->
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation project(":vortex")
+        defaultConfiguration(configuration)
+        applicationConfiguration(configuration)
+        firebaseConfiguration(configuration)
+        uiConfiguration(configuration)
+}
+
+private void defaultConfiguration(config) {
+    config.implementation VortexLibs.AppCompat
+    config.implementation VortexLibs.KotlinJdk
+    config.implementation VortexLibs.AndroidCore
+    config.implementation Vortex.RxJava
+}
+
+private void applicationConfiguration(configuration) {
+    configuration.implementation VortexLibs.MultiDexMerge
+    configuration.implementation VortexLibs.Timber
+    configuration.debugImplementation VortexLibs.LeakCanary
+    configuration.implementation VortexLibs.RxPrefs
+    configuration.implementation VortexLibs.GooglePlayLocationServices
+    configuration.implementation VortexLibs.Picasso
+    configuration.implementation VortexLibs.Fresco
+    configuration.implementation VortexLibs.Glide
+    configuration.implementation VortexLibs.Stetho
+}
+
+private void firebaseConfiguration(config) {
+    config.implementation VortexLibs.FirebaseCore
+    config.implementation VortexLibs.FirebaseAuth
+    config.implementation VortexLibs.Firestore
+    config.implementation VortexLibs.FirebaseMessaging
+    config.implementation VortexLibs.FirebaseStorage
+    config.implementation VortexLibs.FirebaseCrash
+    config.implementation VortexLibs.FirebaseDatabase
+}
+
+private void uiConfiguration(configuration) {
+    configuration.implementation VortexLibs.RecyclerView
+    configuration.implementation VortexLibs.AndroidMaterialDesign
 }

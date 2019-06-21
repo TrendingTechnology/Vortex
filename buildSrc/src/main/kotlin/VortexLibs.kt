@@ -18,4 +18,29 @@ object VortexLibs {
     const val LiveDataCore = "androidx.lifecycle:lifecycle-livedata-core:2.0.0-rc01"
     const val LifecycleExtentions = "androidx.lifecycle:lifecycle-extensions:2.0.0-rc01"
 
+    const val MultiDexMerge = "com.android.support:multidex:1.0.3"
+    const val Timber = "com.jakewharton.timber:timber:4.7.1"
+    const val LeakCanary = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-2"
+
+    const val FirebaseCore = "com.google.firebase:firebase-core:17.0.0"
+    const val FirebaseAuth = "com.google.firebase:firebase-auth:18.0.0"
+    const val Firestore = "com.google.firebase:firebase-firestore:20.0.0"
+    const val FirebaseMessaging = "com.google.firebase:firebase-messaging:19.0.0"
+    const val FirebaseStorage = "com.google.firebase:firebase-storage:18.0.0"
+    const val FirebaseCrash = "com.crashlytics.sdk.android:crashlytics:2.10.1"
+    const val FirebaseDatabase = "com.google.firebase:firebase-database:18.0.0"
+
+    const val RxPrefs = "com.f2prateek.rx.preferences2:rx-preferences:2.0.0"
+
+    const val GooglePlayLocationServices = "com.google.android.gms:play-services-location:16.0.0"
+
+    const val Picasso = "com.squareup.picasso:picasso:2.71828"
+    const val Fresco = "com.facebook.fresco:fresco:1.13.0"
+    const val Glide = "com.github.bumptech.glide:glide:4.9.0"
+
+    const val Stetho = "com.facebook.stetho:stetho:1.5.1"
+
+    const val RecyclerView = "androidx.recyclerview:recyclerview:1.0.0"
+    const val AndroidMaterialDesign = "com.google.android.material:material:1.0.0-rc01"
+
 }

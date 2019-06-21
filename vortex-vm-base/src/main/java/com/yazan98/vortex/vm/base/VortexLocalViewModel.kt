@@ -15,7 +15,7 @@ import java.lang.ref.WeakReference
  * Time : 4:51 PM
  */
 
-class VortexLocalViewModel<V : VortexRxView> : VortexViewModel.LocalViewModel<V>() {
+open class VortexLocalViewModel<V : VortexRxView> : VortexViewModel.LocalViewModel<V>() {
 
     private var view: WeakReference<V>? = null
 

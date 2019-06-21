@@ -19,5 +19,6 @@ object VortexConsts {
     const val SINGLE_NOT_FOUND = "Maybe You Forgot To Implement RxJava 2 ... Single Missing"
     const val REPOSITORY_NOT_FOUND = "Maybe You Forgot To Implement RxJava 2 ... CompositeDisposable Missing"
     const val EMPTY_VIEW_VM = "Current View Not Attached ... Maybe You Forget To Call viewModel.attachView(this)"
+    const val ARCHITECTURE_NOT_INITIALIZED = "Application Architecture Not Initialized in Application Class"
 
 }

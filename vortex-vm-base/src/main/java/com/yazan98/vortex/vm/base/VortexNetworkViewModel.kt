@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference
  * Time : 4:51 PM
  */
 
-class VortexNetworkViewModel<V : VortexRxView> : VortexViewModel.NetworkViewModel<V , MutableLiveData<State>>() {
+open class VortexNetworkViewModel<V : VortexRxView> : VortexViewModel.NetworkViewModel<V , MutableLiveData<State>>() {
 
     private var view: WeakReference<V>? = null
     private val stateObserver: MutableLiveData<State> by lazy { MutableLiveData<State>() }
