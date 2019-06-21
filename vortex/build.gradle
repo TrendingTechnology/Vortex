@@ -107,7 +107,7 @@ bintray {
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexCore}-release.aar")
+            artifact("$buildDir/outputs/aar/vortex-release.aar")
             groupId rootProject.ext.Group
             artifactId "${rootProject.ext.VortexCore}"
             version rootProject.ext.Version

@@ -33,7 +33,7 @@ dependencies {
         implementation project(":vortex")
         defaultConfiguration(configuration)
         viewModelConfiguration(configuration)
-        compile project(path: ':vortex-extras')
+        implementation project(path: ':vortex-extras')
 }
 
 private void defaultConfiguration(config) {
@@ -127,7 +127,7 @@ bintray {
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexVm}-release.aar")
+            artifact("$buildDir/outputs/aar/vortex-vm-release.aar")
             groupId rootProject.ext.Group
             artifactId "${rootProject.ext.VortexVm}"
             version rootProject.ext.Version

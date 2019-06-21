@@ -44,13 +44,14 @@ private void defaultConfiguration(config) {
 private void applicationConfiguration(configuration) {
     configuration.implementation VortexLibs.MultiDexMerge
     configuration.implementation VortexLibs.Timber
-    configuration.debugImplementation VortexLibs.LeakCanary
     configuration.implementation VortexLibs.RxPrefs
     configuration.implementation VortexLibs.GooglePlayLocationServices
     configuration.implementation VortexLibs.Picasso
     configuration.implementation VortexLibs.Fresco
     configuration.implementation VortexLibs.Glide
     configuration.implementation VortexLibs.Stetho
+    configuration.debugImplementation VortexLibs.LeakCanaryAndroid
+    configuration.implementation VortexLibs.Leaksentry
 }
 
 private void firebaseConfiguration(config) {
@@ -145,7 +146,7 @@ bintray {
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexExtras}-release.aar")
+            artifact("$buildDir/outputs/aar/vortex-extras-release.aar")
             groupId rootProject.ext.Group
             artifactId "${rootProject.ext.VortexExtras}"
             version rootProject.ext.Version

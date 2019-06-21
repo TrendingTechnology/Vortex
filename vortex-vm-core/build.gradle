@@ -122,7 +122,7 @@ bintray {
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexVmCore}-release.aar")
+            artifact("$buildDir/outputs/aar/vortex-vm-core-release.aar")
             groupId rootProject.ext.Group
             artifactId "${rootProject.ext.VortexVmCore}"
             version rootProject.ext.Version

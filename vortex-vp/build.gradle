@@ -30,7 +30,7 @@ dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
         implementation project(":vortex")
         defaultConfiguration(configuration)
-        compile project(path: ':vortex-extras')
+        implementation project(path: ':vortex-extras')
 }
 
 private void defaultConfiguration(config) {
@@ -117,7 +117,7 @@ bintray {
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/${rootProject.ext.VortexViper}-release.aar")
+            artifact("$buildDir/outputs/aar/vortex-vp-release.aar")
             groupId rootProject.ext.Group
             artifactId "${rootProject.ext.VortexViper}"
             version rootProject.ext.Version

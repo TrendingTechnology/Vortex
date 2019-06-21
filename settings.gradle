@@ -202,9 +202,10 @@
  *    limitations under the License.
  */
 
-include ':vortex-sample', ':vortex-vm-core',
-        ':vortex-validator',
-        ':vortex-ready-ui',
+include ':vortex-sample',
+        ':vortex-vm-core',
+//        ':vortex-validator',
+//        ':vortex-ready-ui',
         ':vortex',
         ':vortex-vp',
         ':vortex-extras',

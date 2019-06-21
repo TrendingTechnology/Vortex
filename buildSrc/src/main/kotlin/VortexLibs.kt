@@ -52,4 +52,7 @@ object VortexLibs {
     const val LifeCycleExtentions: String = "androidx.lifecycle:lifecycle-extensions:2.0.0"
     const val RxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
 
+    const val LeakCanaryAndroid = "com.squareup.leakcanary:leakcanary-android:2.0-alpha-1"
+    const val Leaksentry = "com.squareup.leakcanary:leaksentry:2.0-alpha-1"
+
 }
