@@ -1,0 +1,166 @@
+apply plugin: Plugins.AndroidLibraryPlugin
+apply plugin: Plugins.AndroidKotlinPlugin
+apply plugin: Plugins.AndroidKotlinExtentions
+apply plugin: Plugins.AndroidMavenPlugin
+apply plugin: Plugins.Bintray
+
+android {
+
+    compileSdkVersion VortexDetails.CompileSdkV
+
+    defaultConfig {
+        minSdkVersion VortexDetails.MinSdkV
+        targetSdkVersion VortexDetails.CompileSdkV
+        versionCode VortexDetails.VersionCode
+        versionName VortexDetails.VersionName
+        testInstrumentationRunner VortexDetails.TestRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    configuration ->
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation project(":vortex")
+        defaultConfiguration(configuration)
+        applicationConfiguration(configuration)
+        firebaseConfiguration(configuration)
+        uiConfiguration(configuration)
+}
+
+private void defaultConfiguration(config) {
+    config.implementation VortexLibs.AppCompat
+    config.implementation VortexLibs.KotlinJdk
+    config.implementation VortexLibs.AndroidCore
+    config.implementation Vortex.RxJava
+}
+
+private void applicationConfiguration(configuration) {
+    configuration.implementation VortexLibs.MultiDexMerge
+    configuration.implementation VortexLibs.Timber
+    configuration.implementation VortexLibs.RxPrefs
+    configuration.implementation VortexLibs.GooglePlayLocationServices
+    configuration.implementation VortexLibs.Picasso
+    configuration.implementation VortexLibs.Fresco
+    configuration.implementation VortexLibs.Glide
+    configuration.implementation VortexLibs.Stetho
+    configuration.debugImplementation VortexLibs.LeakCanaryAndroid
+    configuration.implementation VortexLibs.Leaksentry
+}
+
+private void firebaseConfiguration(config) {
+    config.implementation VortexLibs.FirebaseCore
+    config.implementation VortexLibs.FirebaseAuth
+    config.implementation VortexLibs.Firestore
+    config.implementation VortexLibs.FirebaseMessaging
+    config.implementation VortexLibs.FirebaseStorage
+    config.implementation VortexLibs.FirebaseCrash
+    config.implementation VortexLibs.FirebaseDatabase
+    config.implementation VortexLibs.FirebaseAuthUI
+}
+
+private void uiConfiguration(configuration) {
+    configuration.implementation VortexLibs.RecyclerView
+    configuration.implementation VortexLibs.AndroidMaterialDesign
+}
+
+
+group = rootProject.ext.Group
+version = rootProject.ext.Version
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            packaging rootProject.ext.PackagingType
+            name rootProject.ext.LibraryName
+            description rootProject.ext.VortexExtrasDescription
+            url rootProject.ext.GithubUrl
+
+            artifactId "${rootProject.ext.VortexExtras}"
+            groupId rootProject.ext.Group
+            version rootProject.ext.Version
+
+            licenses {
+
+                license {
+                    name rootProject.ext.licenseName
+                    url rootProject.ext.licenseUrl
+                    distribution rootProject.ext.distribution
+                }
+            }
+
+            scm {
+                connection rootProject.ext.GitUrl
+                url rootProject.ext.GithubUrl
+            }
+
+            developers {
+
+                developer {
+                    id rootProject.ext.DeveloperID
+                    name rootProject.ext.DeveloperName
+                    email rootProject.ext.DeveloperEmail
+                }
+
+            }
+
+        }
+    }
+}
+
+bintray {
+
+    user = "${rootProject.ext.bintrayUsername}"
+    key = "${rootProject.ext.bintrayApiKey}"
+
+    configurations = ['archives']
+    publications = ['Production']
+
+    publish = true
+
+    pkg {
+        repo = rootProject.ext.LibraryName
+        name = "${rootProject.ext.VortexExtras}"
+        desc = "${rootProject.ext.VortexExtrasDescription}"
+
+        dryRun = false
+        publish = true
+        override = true
+
+        userOrg = user
+        licenses = ["${rootProject.ext.licenseName}"]
+        vcsUrl = rootProject.ext.GitUrl
+        issueTrackerUrl = rootProject.ext.GithubIssuesUrl
+
+        publicDownloadNumbers = true
+
+    }
+}
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            artifact("$buildDir/outputs/aar/vortex-extras-release.aar")
+            groupId rootProject.ext.Group
+            artifactId "${rootProject.ext.VortexExtras}"
+            version rootProject.ext.Version
+
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode('dependency')
+                    dependencyNode.appendNode('groupId', it.group)
+                    dependencyNode.appendNode('artifactId', it.name)
+                    dependencyNode.appendNode('version', it.version)
+                }
+            }
+        }
+    }
+}

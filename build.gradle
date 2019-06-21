@@ -1,6 +1,5 @@
-
 /**
- *    Copyright [2019] [Yazan Tarifi]
+ *    Copyright 2019 Yazan Tarifi
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,7 +38,9 @@ buildscript {
         classpath RootLibs.Bintray
         classpath RootLibs.SpringBootPluginV2
         classpath RootLibs.AndroidMaven
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+
 
 }
 
@@ -57,21 +58,17 @@ allprojects {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "https://maven.google.com" }
         maven { url "https://dl.bintray.com/drummer-aidan/maven/" }
-        maven { url 'https://repo.spring.io/libs-snapshot' }
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url 'https://repo.spring.io/snapshot' }
-        maven { url 'https://repo.spring.io/milestone' }
     }
 }
 
 allprojects {
-    apply plugin : "maven-publish"
+    apply plugin: "maven-publish"
 }
 
 apply plugin: Plugins.JavaPlugin
 apply plugin: Plugins.IdeaPlugin
 apply plugin: Plugins.AndroidMavenPlugin
-apply plugin: Plugins.SpringBootPluginmanagment
 
 
 configurations {
@@ -81,8 +78,7 @@ configurations {
 }
 
 /**
- * Apply Checkstyle To Project To manage The SourceCode {PMD , CHECKSTYLE}
- * */
+ * Apply Checkstyle To Project To manage The SourceCode {PMD , CHECKSTYLE}* */
 apply from: "tools/checkstyle.gradle"
 apply from: "tools/pmd.gradle"
 apply from: "tools/SpringDependencies.gradle"
@@ -92,12 +88,12 @@ apply from: "tools/SpringDependencies.gradle"
  */
 
 ext {
-    RiverGroup = "com.yazan98.river.core"
-    RiverVersion = "0.0.11"
+    Group = "com.yazan98.vortex"
+    Version = "0.0.1"
     PackagingType = "arr"
-    LibraryName = "River-Core"
-    GithubUrl = "https://www.github.com/Yazan98/River-Core"
-    GitUrl = "https://www.github.com/Yazan98/River-Core.git"
+    LibraryName = "Vortex"
+    GithubUrl = "https://www.github.com/Yazan98/Vortex"
+    GitUrl = "https://www.github.com/Yazan98/Vortex.git"
     licenseName = "Apache-2.0"
     licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0"
     distribution = 'repo'
@@ -105,8 +101,26 @@ ext {
     DeveloperID = "yt98"
     DeveloperName = "Yazan Tarifi"
     DeveloperEmail = ""
-    Description = "River Android Applications"
+    Description = "Vortex Android Applications"
 
     bintrayUsername = "yt98"
     bintrayApiKey = ""
+
+    VortexCore = "vortex-core-ktx"
+    VortexCoreDescription = "Base Code To Build Vortex Applications Based On RxJava 2"
+
+    VortexD = "vortex-data-ktx"
+    VortexDDescription = "Vortex Android Data Layer To Handle Network Requests"
+
+    VortexExtras = "vortex-extras-ktx"
+    VortexExtrasDescription = "Vortex Android UI Layer With Many Operations"
+
+    VortexVm = "vortex-viewmodel-ktx"
+    VortexVmDescription = "Vortex Android UI Layer For ViewModel Implementation"
+
+    VortexVmCore = "vortex-viewmodel-core-ktx"
+    VortexVmCoreDescription = "Vortex Android UI Layer For ViewModel Core Configuration"
+
+    VortexViper = "vortex-viper-ktx"
+    VortexViperDescription = "Vortex Android UI Layer For ViewModel Implementation"
 }

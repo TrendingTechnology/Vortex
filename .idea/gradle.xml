@@ -8,14 +8,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/android-sample" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/river-android" />
-            <option value="$PROJECT_DIR$/river-android-data" />
-            <option value="$PROJECT_DIR$/river-android-extras" />
-            <option value="$PROJECT_DIR$/river-android-vm" />
-            <option value="$PROJECT_DIR$/river-base" />
-            <option value="$PROJECT_DIR$/river-validator" />
+            <option value="$PROJECT_DIR$/vortex" />
+            <option value="$PROJECT_DIR$/vortex-data" />
+            <option value="$PROJECT_DIR$/vortex-extras" />
+            <option value="$PROJECT_DIR$/vortex-sample" />
+            <option value="$PROJECT_DIR$/vortex-vm" />
+            <option value="$PROJECT_DIR$/vortex-vm-core" />
+            <option value="$PROJECT_DIR$/vortex-vp" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
